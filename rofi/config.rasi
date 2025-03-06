@@ -1,5 +1,5 @@
 * {
-    font: "Figtree 16";
+    font: "Arial 16";
     g-spacing: 10px;
     g-margin: 0;
     b-color: #1e1e2e;
