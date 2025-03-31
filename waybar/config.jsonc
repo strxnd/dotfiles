@@ -14,15 +14,10 @@
         "hyprland/window"
     ],
     "modules-right": [
-        "idle_inhibitor",
         "pulseaudio",
-        "network",
         "cpu",
         "memory",
         "temperature",
-        "hyprland/language",
-        "battery",
-        "battery#bat2",
         "clock"
     ],
     //Modules configuration
