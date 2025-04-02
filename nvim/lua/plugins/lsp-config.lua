@@ -32,6 +32,9 @@ return {
       lspconfig.lua_ls.setup({
         capabilities = capabilities
       })
+      lspconfig.clangd.setup({
+        capabilities = capabilities
+      })
 
       -- Set up nvim-cmp.
       local cmp = require 'cmp'
