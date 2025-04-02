@@ -1,6 +1,6 @@
 if status is-interactive
   # Run if shell is interactive 
-  neofetch
+  fastfetch
 end
 
 # Aliases
