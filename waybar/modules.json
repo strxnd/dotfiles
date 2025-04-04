@@ -4,7 +4,6 @@
     "tooltip": true,
     "tooltip-format": "btw"
   },
-
   "hyprland/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
@@ -33,6 +32,12 @@
       "default": ["", "", ""]
     },
     "on-click": "pavucontrol"
+  },
+  "custom/bluetooth": {
+    "exec": "~/dotfiles/waybar/scripts/bluetooth.sh",
+    "interval": 1,
+    "return-type": "json",
+    "tooltip": true
   },
   "cpu": {
     "format": "  {usage}%",
