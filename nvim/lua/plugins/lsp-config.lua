@@ -1,6 +1,25 @@
 return {
-  { "williamboman/mason.nvim" },
-  { "williamboman/mason-lspconfig.nvim" },
+  {
+    "williamboman/mason.nvim",
+    config = function ()
+      require("mason").setup()
+    end
+  },
+  {
+    "jay-babu/mason-null-ls.nvim",
+    opts = {
+      ensure_installed = { "clang-format", "stylua", "prettier" }
+    },
+    config = function ()
+      require("mason-lspconfig").setup()
+    end
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    opts = {
+      ensure_installed = { "clangd", "lua_ls", "ts_ls", }
+    }
+  },
   { "hrsh7th/cmp-nvim-lsp" },
   { "hrsh7th/nvim-cmp" },
   { "L3MON4D3/LuaSnip" },
@@ -17,16 +36,8 @@ return {
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local lspconfig = require("lspconfig")
 
-      require("mason").setup({
-        ensure_installed = { "prettier", "stylua", "ts_ls", "html", "lua_ls" }
-      })
-      require("mason-lspconfig").setup()
-
       -- Setup LSP servers
       lspconfig.ts_ls.setup({
-        capabilities = capabilities
-      })
-      lspconfig.html.setup({
         capabilities = capabilities
       })
       lspconfig.lua_ls.setup({
