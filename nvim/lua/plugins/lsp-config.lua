@@ -1,7 +1,7 @@
 return {
   {
     "williamboman/mason.nvim",
-    config = function ()
+    config = function()
       require("mason").setup()
     end
   },
@@ -10,15 +10,15 @@ return {
     opts = {
       ensure_installed = { "clang-format", "stylua", "prettier" }
     },
-    config = function ()
-      require("mason-lspconfig").setup()
-    end
   },
   {
     "williamboman/mason-lspconfig.nvim",
     opts = {
       ensure_installed = { "clangd", "lua_ls", "ts_ls", }
-    }
+    },
+    config = function()
+      require("mason-lspconfig").setup()
+    end
   },
   { "hrsh7th/cmp-nvim-lsp" },
   { "hrsh7th/nvim-cmp" },

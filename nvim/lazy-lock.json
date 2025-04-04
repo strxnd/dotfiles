@@ -4,7 +4,7 @@
   "catppuccin": { "branch": "main", "commit": "5b5e3aef9ad7af84f463d17b5479f06b87d5c429" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "a8912b88ce488f411177fc8aed358b04dc246d7b" },
   "cmp_luasnip": { "branch": "master", "commit": "98d9cb5c2c38532bd9bdb481067b20fea8f32e90" },
-  "copilot.lua": { "branch": "master", "commit": "5a8fdd34bb67eadc3f69e46870db0bed0cc9841c" },
+  "copilot.vim": { "branch": "release", "commit": "a9228e015528c9307890c48083c925eb98a64a79" },
   "dressing.nvim": { "branch": "master", "commit": "2d7c2db2507fa3c4956142ee607431ddb2828639" },
   "fzf-lua": { "branch": "main", "commit": "6488ada2f376e47789391dc353b6d91a3f9de6f6" },
   "img-clip.nvim": { "branch": "main", "commit": "08a02e14c8c0d42fa7a92c30a98fd04d6993b35d" },
