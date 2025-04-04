@@ -7,7 +7,7 @@ return {
       sources = {
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.prettier,
-        -- require("none-ls.diagnostics.eslint"),
+        require("none-ls.diagnostics.eslint"),
         null_ls.builtins.formatting.clang_format,
       },
     })

@@ -10,6 +10,6 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 4
 vim.diagnostic.config({
 	virtual_text = true,
-	update_in_insert = true,
+  update_in_insert = true,
 })
 vim.g.copilot_enabled = false
