@@ -48,7 +48,8 @@ window#waybar {
 #power-profiles-daemon,
 #language,
 #mpd,
-#custom-bluetooth {
+#custom-bluetooth,
+#custom-power {
   padding: 0 10px;
   border-radius: 15px;
 }
@@ -71,7 +72,8 @@ window#waybar {
 #power-profiles-daemon:hover,
 #language:hover,
 #mpd:hover,
-#custom-bluetooth:hover {
+#custom-bluetooth:hover,
+#custom-power:hover {
   background: rgba(49, 50, 68, 0.9);
 }
 
