@@ -55,7 +55,7 @@
     "format": " {temperatureC}°C"
   },
   "clock": {
-    "format": "{:%H:%M | %e %B} ",
+    "format": "{:%e %B %Y | %I:%M %p} ",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format-alt": "{:%Y-%m-%d}"
   },
