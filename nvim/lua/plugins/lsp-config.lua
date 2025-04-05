@@ -6,19 +6,17 @@ return {
 		end,
 	},
 	{
+		"williamboman/mason-lspconfig.nvim",
+		opts = {
+			ensure_installed = { "clangd", "lua_ls", "ts_ls" },
+			automatic_installation = true,
+		},
+	},
+	{
 		"jay-babu/mason-null-ls.nvim",
 		opts = {
 			ensure_installed = { "clang-format", "stylua", "prettier", "eslint" },
 		},
-	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		opts = {
-			ensure_installed = { "clangd", "lua_ls", "ts_ls" },
-		},
-		config = function()
-			require("mason-lspconfig").setup()
-		end,
 	},
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "hrsh7th/nvim-cmp" },
