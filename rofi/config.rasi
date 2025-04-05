@@ -44,15 +44,16 @@ window {
 
 prompt {
     text-color: @fg-color;
+    padding: 0px 8px 0px 0px;
 }
 
 inputbar {
-    children: ["prompt", "entry"];
+    children: ["prompt","entry"];
     spacing: @g-spacing;
 }
 
 entry {
-    placeholder: "Search Apps";
+    placeholder: "Search";
     text-color: @fg-color;
     placeholder-color: @fgp-color;
 }
@@ -96,6 +97,6 @@ element selected.normal {
 }
 
 message {
-    background-color: red;
+    background-color: @wbg-color;
     border: 0px solid;
 }
