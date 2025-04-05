@@ -35,7 +35,7 @@
   },
   "custom/bluetooth": {
     "exec": "~/dotfiles/waybar/scripts/bluetooth.sh",
-    "interval": 1,
+    "interval": 5,
     "return-type": "json",
     "tooltip": true
   },
@@ -48,7 +48,7 @@
     "tooltip": true
   },
   "temperature": {
-    "interval": 10,
+    "interval": 5,
     "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input",
     "critical-threshold": 100,
     "format-critical": " {temperatureC}",
