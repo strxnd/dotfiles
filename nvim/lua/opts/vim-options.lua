@@ -9,7 +9,6 @@ vim.opt.laststatus = 3 -- views can only be fully collapsed with the global stat
 vim.opt.cursorline = true
 vim.opt.scrolloff = 4
 vim.diagnostic.config({
-	virtual_text = true,
+  virtual_text = true,
   update_in_insert = true,
 })
-vim.g.copilot_enabled = false
