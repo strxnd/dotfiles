@@ -1,4 +1,6 @@
-# Strxnd's Dotfiles
+<div align="center">
+  # Strxnd's Dotfiles
+</div>
 
 My personal dotfiles for a modern Linux desktop environment. This repository contains configurations for various tools and applications that make up my development and desktop environment.
 
