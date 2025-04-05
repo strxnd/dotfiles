@@ -1,8 +1,8 @@
-# Dotfiles
+# Strxnd's Dotfiles
 
 My personal dotfiles for a modern Linux desktop environment. This repository contains configurations for various tools and applications that make up my development and desktop environment.
 
-## 🖥️ Features
+##  Features
 
 - **Window Manager**: [Hyprland](https://hyprland.org/) - A dynamic tiling Wayland compositor
 - **Shell**: [Fish](https://fishshell.com/) - A smart and user-friendly command line shell
@@ -11,40 +11,51 @@ My personal dotfiles for a modern Linux desktop environment. This repository con
 - **Application Launcher**: [Rofi](https://github.com/davatorium/rofi) - A window switcher, application launcher and dmenu replacement
 - **Status Bar**: [Waybar](https://github.com/Alexays/Waybar) - A highly customizable status bar for Wayland
 - **Logout Menu**: [Wlogout](https://github.com/ArtsyMacaw/wlogout) - A wayland logout menu
-- **File Manager**: [LSD](https://github.com/Peltoche/lsd) - A modern ls with a lot of pretty colors and icons
 - **Theme**: [Catppuccin Mocha](https://github.com/catppuccin/catppuccin) - A beautiful dark theme applied across all applications (GTK, terminal, editor, etc.)
 
-## 🔧 Requirements
+## 󰹑 Screenshots
+
+![screenshot](screenshots/1.png)
+![screenshot](screenshots/2.png)
+![screenshot](screenshots/3.png)
+![screenshot](screenshots/4.png)
+
+##  Requirements
 
 - A GNU/Linux distribution (preferably Arch-based as I do not know about the compatibility of these packages on other distros)
 
-## 🚀 Installation
+## 󰏓 Installation
 
 1. Install required packages:
+
 ```bash
 # Core packages
-sudo pacman -S hyprland hyprpaper kitty fish rofi waybar wlogout lsd neovim stow nautilus nwg-look
+yay -S hyprland hyprpaper hyprshot hyprlock fastfetch zoxide kitty fish rofi waybar wlogout lsd neovim stow nautilus nwg-look
 
-# Neovim dependencies
-sudo pacman -S nodejs npm ripgrep fd lazygit
+# Neovim dependencies (required for )
+yay -S nodejs npm ripgrep fd lazygit
 ```
 
 2. Install Fish plugins:
+
 ```bash
 # Install Fisher (Fish plugin manager)
-curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source
+yay -S fisher
 
 # Install required plugins
 fisher install patrickf1/fzf.fish ilancosman/tide catppuccin/fish jorgebucaran/autopair.fish
 ```
 
-3. Clone this repository:
+3. Clone this repository in your home directory and cd into it:
+
 ```bash
-git clone https://github.com/yourusername/dotfiles.git
+cd ~
+git clone https://github.com/strxnd/dotfiles.git
 cd dotfiles
 ```
 
 4. Use Stow to symlink all configurations to ~/.config:
+
 ```bash
 stow . -t ~/.config
 ```
@@ -65,6 +76,7 @@ This will create symlinks for all configuration directories in your ~/.config fo
 ├── rofi/          # Rofi application launcher config
 ├── waybar/        # Waybar status bar configuration
 └── wlogout/       # Wlogout configuration
+└── fastfetch/     # Fastfetch configuration
 ```
 
 ## 🤝 Contributing
