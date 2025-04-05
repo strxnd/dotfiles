@@ -1,5 +1,11 @@
 <div align="center">
-   <h1>Strxnd's Dotfiles</h1>
+    <h1>💻 Strxnd's Dotfiles 💻</h1>
+    <p align="center">
+      <img src="https://img.shields.io/github/last-commit/strxnd/dotfiles?color=ff6c6c&style=flat-square" />
+      <img src="https://img.shields.io/github/stars/strxnd/dotfiles?color=ffd700&style=flat-square" />
+      <img src="https://img.shields.io/github/forks/strxnd/dotfiles?color=5fd068&style=flat-square" />
+      <img src="https://img.shields.io/github/repo-size/strxnd/dotfiles?color=6c9eff&style=flat-square" />
+    </p>
 </div>
 
 My personal dotfiles for a modern Linux desktop environment. This repository contains configurations for various tools and applications that make up my development and desktop environment.
