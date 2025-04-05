@@ -5,9 +5,15 @@
     "height": 18,
   },
   "display": {
-    "separator": " : ",
+    "separator": ": ",
   },
   "modules": [
+    "break",
+    {
+      "type": "title",
+      "key": "  ",
+      "format": "{6}{7}{8}",
+    },
     {
       "type": "custom",
       "format": "┌──────────────────────────────────────────┐",
@@ -57,11 +63,6 @@
     },
     "break",
     {
-      "type": "title",
-      "key": "  ",
-      "format": "{6} {7} {8}",
-    },
-    {
       "type": "custom",
       "format": "┌──────────────────────────────────────────┐",
     },
@@ -85,18 +86,18 @@
     },
     {
       "type": "memory",
-      "key": "  󰍜 Memory ",
+      "key": "  󰍜 Memory",
       "keyColor": "magenta",
     },
     {
       "type": "command",
-      "key": "  󱦟 OS Age ",
+      "key": "  󱦟 OS Age",
       "keyColor": "red",
       "text": "birth_install=$(stat -c %W /); current=$(date +%s); time_progression=$((current - birth_install)); days_difference=$((time_progression / 86400)); echo $days_difference days",
     },
     {
       "type": "uptime",
-      "key": "  󱫐 Uptime ",
+      "key": "  󱫐 Uptime",
       "keyColor": "red",
     },
     {
