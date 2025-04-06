@@ -30,7 +30,7 @@ My personal dotfiles for a modern Linux desktop environment. This repository con
 
 ##  Requirements
 
-- A GNU/Linux distribution (preferably Arch-based as I do not know about the compatibility of these packages on other distros)
+- A Linux distribution (preferably Arch-based)
 
 ## 󰏓 Installation
 
