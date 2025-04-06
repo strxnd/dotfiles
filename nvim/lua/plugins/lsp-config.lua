@@ -12,14 +12,9 @@ return {
 			automatic_installation = true,
 		},
 	},
-	{
-		"jay-babu/mason-null-ls.nvim",
-		opts = {
-			ensure_installed = { "clang-format", "stylua", "prettier", "eslint" },
-		},
-	},
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "hrsh7th/nvim-cmp" },
+	{ "onsails/lspkind.nvim" },
 	{ "L3MON4D3/LuaSnip" },
 	{ "saadparwaiz1/cmp_luasnip" },
 	{
@@ -33,6 +28,8 @@ return {
 
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
+			local lspkind = require("lspkind")
+			local cmp = require("cmp")
 
 			-- Setup LSP servers
 			lspconfig.ts_ls.setup({
@@ -46,7 +43,6 @@ return {
 			})
 
 			-- Set up nvim-cmp.
-			local cmp = require("cmp")
 
 			cmp.setup({
 				snippet = {
@@ -69,6 +65,13 @@ return {
 				}, {
 					{ name = "buffer" },
 				}),
+				formatting = {
+					format = lspkind.cmp_format({
+						mode = "symbol",
+						maxwidth = 50,
+						symbol_map = { Copilot = "" },
+					}),
+				},
 			})
 
 			-- To use git you need to install the plugin petertriho/cmp-git and uncomment lines below

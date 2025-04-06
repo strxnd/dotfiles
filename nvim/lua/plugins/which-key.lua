@@ -25,6 +25,7 @@ return {
 			{ "<leader>g", group = "Git" },
 			{ "<leader>u", group = "UI" },
 			{ "<leader>s", group = "Search" },
+			{ "<leader>d", group = "Debug" },
 		})
 	end,
 }
