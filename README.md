@@ -19,7 +19,7 @@ My personal dotfiles for a modern Linux desktop environment. This repository con
 - **Application Launcher**: [Rofi](https://github.com/davatorium/rofi) - A window switcher, application launcher and dmenu replacement
 - **Status Bar**: [Waybar](https://github.com/Alexays/Waybar) - A highly customizable status bar for Wayland
 - **Logout Menu**: [Wlogout](https://github.com/ArtsyMacaw/wlogout) - A wayland logout menu
-- **Theme**: [Catppuccin Mocha](https://github.com/catppuccin/catppuccin) - A beautiful dark theme applied across all applications (GTK, terminal, editor, etc.)
+- **Theme**: [Catppuccin Mocha](https://github.com/catppuccin/catppuccin) - A beautiful dark theme applied across all applications (terminal, editor, etc.)
 
 ## 󰹑 Screenshots
 
@@ -38,9 +38,9 @@ My personal dotfiles for a modern Linux desktop environment. This repository con
 
 ```bash
 # Core packages
-yay -S hyprland hyprpaper hyprshot hyprlock fastfetch zoxide kitty fish rofi waybar wlogout lsd neovim stow nautilus nwg-look
+yay -S hyprland hyprpaper hyprshot hyprlock fastfetch zoxide kitty fish rofi waybar wlogout lsd neovim stow nautilus nwg-look ttf-firacode-nerd ttf-space-mono-nerd gnu-free-fonts imagemagick starship
 
-# Neovim dependencies (required for )
+# Neovim dependencies
 yay -S nodejs npm ripgrep fd lazygit
 ```
 
@@ -51,7 +51,7 @@ yay -S nodejs npm ripgrep fd lazygit
 yay -S fisher
 
 # Install required plugins
-fisher install patrickf1/fzf.fish ilancosman/tide catppuccin/fish jorgebucaran/autopair.fish
+fisher install patrickf1/fzf.fish catppuccin/fish jorgebucaran/autopair.fish
 ```
 
 3. Clone this repository in your home directory and cd into it:
