@@ -45,11 +45,13 @@
   },
   "cpu": {
     "format": "  {usage}%",
-    "tooltip": true
+    "tooltip": true,
+    "interval": 5
   },
   "memory": {
     "format": "  {}%",
-    "tooltip": true
+    "tooltip": true,
+    "interval": 5
   },
   "temperature": {
     "interval": 5,
