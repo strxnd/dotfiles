@@ -11,7 +11,7 @@
     hlt-color: #4c4f69;
     alt-color: #181825;
     wbg-color: #1e1e2e;
-    w-border: 2px solid;
+    w-border: 0px solid;
     w-border-color: #e6e9ef;
     w-padding: 12px;
 }
