@@ -1,9 +1,9 @@
 local options = {
   formatters_by_ft = {
     lua = { "stylua" },
-    typescript = { "prettier" },
-    javascript = { "prettier" },
-    c = { "clang-format" }
+    typescript = { "biome" },
+    javascript = { "biome" },
+    c = { "clang-format" },
   },
 
   format_on_save = {
