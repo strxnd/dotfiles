@@ -31,8 +31,10 @@ M.ui = {
 M.mason = {
   pkgs = {
     "clangd",
-    "codelldb",
     "clang-format",
+    "rust-analyzer",
+    "rustfmt",
+    "codelldb",
     "typescript-language-server",
     "js-debug-adapter",
     "biome",

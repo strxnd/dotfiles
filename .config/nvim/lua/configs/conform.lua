@@ -4,6 +4,7 @@ local options = {
     typescript = { "biome" },
     javascript = { "biome" },
     c = { "clang-format" },
+    rust = { "rustfmt" },
   },
 
   format_on_save = {

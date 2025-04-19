@@ -3,7 +3,9 @@ return {
   opts = {
     ensure_installed = {
       "c",
+      "rust",
       "typescript",
+      "javascript",
       "lua",
     },
   },
