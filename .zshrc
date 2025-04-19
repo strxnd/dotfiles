@@ -56,6 +56,17 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 alias ls='lsd'
 alias c='clear'
 
+# Funcions
+nvo() {
+  folder=$(zenity --file-selection --directory --title="Select a folder")
+  if [ -n "$folder" ]; then
+    cd "$folder"
+    neovide
+  else
+    zenity --error --text="No folder selected"
+  fi
+}
+
 # Shell integrations
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.toml)"
