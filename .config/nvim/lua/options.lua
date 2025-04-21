@@ -9,3 +9,4 @@ o.tabstop = 2
 o.softtabstop = 2
 o.relativenumber = true
 o.whichwrap = ""
+o.mouse = ""
