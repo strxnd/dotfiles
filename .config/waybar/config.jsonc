@@ -10,14 +10,16 @@
   "modules-center": ["hyprland/window"],
   "modules-right": [
     "pulseaudio",
+    "battery",
+    "network",
     "custom/bluetooth",
     "cpu",
     "memory",
     "temperature",
     "clock",
-    "custom/power",
+    "custom/power"
   ],
   //Modules configuration
 
-  "include": ["~/.config/waybar/modules.json"],
+  "include": ["~/.config/waybar/modules.json"]
 }

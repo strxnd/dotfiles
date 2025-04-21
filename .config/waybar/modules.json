@@ -21,10 +21,10 @@
   },
   "pulseaudio": {
     "format": "{icon}  {volume}%",
-    "format-bluetooth": "{icon} {volume}%  {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
-    "format-source": " {volume}%",
+    "format-bluetooth": "{icon}  {volume}%    {format_source}",
+    "format-bluetooth-muted": "  {icon}    {format_source}",
+    "format-muted": "  {format_source}",
+    "format-source": "  {volume}%",
     "format-source-muted": "",
     "format-icons": {
       "headphone": "",
@@ -37,8 +37,33 @@
     },
     "on-click": "pavucontrol"
   },
+  "battery": {
+    "bat": "BAT0",
+    "interval": 30,
+    "format": "󰁹  {capacity}%",
+    "format-charging": "󰂄  {capacity}%",
+    "format-plugged": "󰂄  {capacity}%",
+    "format-low": "󰁼  {capacity}%",
+    "format-full": "󰁹  {capacity}",
+    "states": {
+      "warning": 30,
+      "critical": 15
+    }
+  },
+  "network": {
+    "interface": "wlan0",
+    "format": "{ifname}",
+    "format-wifi": "   {essid}",
+    "format-ethernet": "󰊗  {ipaddr}/{cidr}",
+    "format-disconnected": "",
+    "tooltip-format": "󰊗  {ifname} via {gwaddr}",
+    "tooltip-format-wifi": "  {essid}",
+    "tooltip-format-ethernet": "  {ifname}",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50
+  },
   "custom/bluetooth": {
-    "exec": "~/dotfiles/waybar/scripts/bluetooth.sh",
+    "exec": "~/dotfiles/.config/waybar/scripts/bluetooth.sh",
     "interval": 5,
     "return-type": "json",
     "tooltip": true
@@ -58,12 +83,11 @@
     "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input",
     "critical-threshold": 100,
     "format-critical": " {temperatureC}",
-    "format": " {temperatureC}°C"
+    "format": "  {temperatureC}°C"
   },
   "clock": {
-    "format": "{:%e %B %Y | %I:%M %p} ",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "{:%Y-%m-%d}"
+    "format": "{:%e %B %Y | %I:%M %p}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
   "custom/power": {
     "format": "",
