@@ -5,6 +5,7 @@ return {
     version = false, -- Never set this value to "*"! Never!
     opts = {
       provider = "copilot",
+      model = "gpt-5",
     },
     build = "make",
     dependencies = {
