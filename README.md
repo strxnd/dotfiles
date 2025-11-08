@@ -1,92 +1,121 @@
-<div align="center">
-    <h1>💻 Strxnd's Dotfiles 💻</h1>
-    <p align="center">
-      <img src="https://img.shields.io/github/last-commit/strxnd/dotfiles?color=ff6c6c&style=flat-square" />
-      <img src="https://img.shields.io/github/stars/strxnd/dotfiles?color=ffd700&style=flat-square" />
-      <img src="https://img.shields.io/github/forks/strxnd/dotfiles?color=5fd068&style=flat-square" />
-      <img src="https://img.shields.io/github/repo-size/strxnd/dotfiles?color=6c9eff&style=flat-square" />
-    </p>
-</div>
+# dotfiles
 
-My personal dotfiles for a modern Linux desktop environment. This repository contains configurations for various tools and applications that make up my development and desktop environment.
+> A minimal, performant Wayland rice built for speed and aesthetics
 
-##  Features
+## Showcase
 
-- **Window Manager**: [Hyprland](https://hyprland.org/) - A dynamic tiling Wayland compositor
-- **Shell**: [Fish](https://fishshell.com/) - A smart and user-friendly command line shell
-- **Terminal**: [Kitty](https://sw.kovidgoyal.net/kitty/) - A fast, feature-rich, GPU based terminal emulator
-- **Editor**: [Neovim](https://neovim.io/) - A modern fork of Vim
-- **Application Launcher**: [Rofi](https://github.com/davatorium/rofi) - A window switcher, application launcher and dmenu replacement
-- **Status Bar**: [Waybar](https://github.com/Alexays/Waybar) - A highly customizable status bar for Wayland
-- **Logout Menu**: [Wlogout](https://github.com/ArtsyMacaw/wlogout) - A wayland logout menu
-- **Theme**: [Catppuccin Mocha](https://github.com/catppuccin/catppuccin) - A beautiful dark theme applied across all applications (terminal, editor, etc.)
+<!-- Add your screenshots here -->
 
-## 󰹑 Screenshots
+### Desktop
+![Desktop]()
 
-![screenshot](screenshots/1.png)
-![screenshot](screenshots/2.png)
-![screenshot](screenshots/3.png)
-![screenshot](screenshots/4.png)
+### Terminal
+![Terminal]()
 
-##  Requirements
+### Launcher
+![Launcher]()
 
-- A Linux distribution (preferably Arch-based)
+---
 
-## 󰏓 Installation
+## Overview
 
-1. Install required packages:
+A carefully curated Wayland setup prioritizing **performance**, **minimalism**, and **clean aesthetics**. Every component is chosen to be lightweight while maintaining a polished look.
 
-```bash
-# Core packages
-yay -S hyprland hyprpaper hyprshot hyprlock fastfetch zoxide kitty fish rofi waybar wlogout lsd neovim stow nautilus nwg-look ttf-firacode-nerd ttf-space-mono-nerd gnu-free-fonts imagemagick starship
+### Core Components
 
-# Neovim dependencies
-yay -S nodejs npm ripgrep fd lazygit
-```
+| Component | Tool | Why |
+|-----------|------|-----|
+| **Display Server** | Wayland | Modern, secure, smooth |
+| **Window Manager** | [Sway](https://github.com/swaywm/sway) | i3-compatible, stable, minimal |
+| **Status Bar** | [Waybar](https://github.com/Alexays/Waybar) | Highly customizable, CSS theming |
+| **Launcher** | [Fuzzel](https://codeberg.org/dnkl/fuzzel) | Blazingly fast, minimal |
+| **Terminal** | [WezTerm](https://wezfurlong.org/wezterm/) | GPU-accelerated, cross-platform, Rust-based |
+| **Notifications** | [SwayNC](https://github.com/ErikReider/SwayNotificationCenter) | Feature-rich notification daemon with control center |
+| **Editor** | [Neovim](https://neovim.io/) | NvChad-based configuration |
 
-2. Install Fish plugins:
+### Utilities
 
-```bash
-# Install Fisher (Fish plugin manager)
-yay -S fisher
+| Tool | Purpose |
+|------|---------|
+| **Swaylock** | Screen locking |
+| **Swayidle** | Idle management |
+| **Swaybg** | Wallpaper manager |
+| **Grim + Slurp** | Screenshots |
+| **Cliphist** | Clipboard history |
+| **yazi** | Modern TUI file manager |
+| **pulsemixer** | TUI audio control |
+| **nmtui** | TUI network manager |
 
-# Install required plugins
-fisher install patrickf1/fzf.fish catppuccin/fish jorgebucaran/autopair.fish
-```
+### System
 
-3. Clone this repository in your home directory and cd into it:
+- **Audio:** Pipewire + Wireplumber
+- **Network:** NetworkManager
+- **Clipboard:** wl-clipboard
 
-```bash
-cd ~
-git clone https://github.com/strxnd/dotfiles.git
-cd dotfiles
-```
+---
 
-4. Use Stow to symlink all configurations to ~/.config:
+## Installation
+
+Clone the repository:
 
 ```bash
-stow . -t ~/.config
+git clone https://github.com/yourusername/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+chmod +x install.sh
 ```
 
-This will create symlinks for all configuration directories in your ~/.config folder.
+Run the interactive installer:
 
-## 📁 Structure
-
-```
-.
-├── fish/          # Fish shell configuration
-├── gtk-3.0/       # GTK3 theme
-├── gtk-4.0/       # GTK4 theme
-├── hypr/          # Hyprland window manager config
-├── kitty/         # Kitty terminal configuration
-├── lsd/           # LSD file manager configuration
-├── nvim/          # Neovim configuration
-├── rofi/          # Rofi application launcher config
-├── waybar/        # Waybar status bar configuration
-└── wlogout/       # Wlogout configuration
-└── fastfetch/     # Fastfetch configuration
+```bash
+./install.sh
 ```
 
-## 🤝 Contributing
+### Installation Options
 
-Feel free to submit issues and enhancement requests!
+```bash
+# Interactive installation (recommended)
+./install.sh
+
+# Auto-install without prompts
+./install.sh --auto-yes
+
+# Install only packages
+./install.sh --packages-only
+
+# Install only configs (skip packages)
+./install.sh --links-only
+
+# Minimal install (skip oh-my-posh, fastfetch)
+./install.sh --minimal
+```
+
+### Nvidia Users
+
+If using Nvidia drivers (`nvidia` or `nvidia-open`), add these to your `.zshrc`:
+
+```bash
+# Nvidia Wayland support
+export WLR_NO_HARDWARE_CURSORS=1
+export GBM_BACKEND=nvidia-drm
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+```
+
+---
+
+## Performance
+
+Estimated RAM usage (all utilities running): **~120-150 MB**
+
+This setup is designed to be resource-efficient without compromising on functionality or aesthetics.
+
+---
+
+## Credits
+
+Inspired by the Linux ricing community and built with ❤️ for Wayland.
+
+---
+
+## License
+
+MIT

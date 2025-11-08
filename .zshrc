@@ -1,10 +1,5 @@
 # Run fastfetch as a welcome screen on startup
-echo '     ______           __          __  _       '
-echo '    / ____/___ ____  / /__  _____/ /_(_)___ _ '
-echo '   / /   / __ `/ _ \/ / _ \/ ___/ __/ / __ `/ '
-echo '  / /___/ /_/ /  __/ /  __(__  ) /_/ / /_/ /  '
-echo '  \____/\__,_/\___/_/\___/____/\__/_/\__,_/   '
-fastfetch --key-padding-left 5
+fastfetch
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -60,6 +55,9 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # Aliases
 alias ls='lsd'
 alias c='clear'
+
+# Env vars
+export EDITOR=nvim
 
 # Shell integrations
 eval "$(zoxide init --cmd cd zsh)"
