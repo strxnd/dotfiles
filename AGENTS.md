@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a dotfiles repository for a minimal, performant **Wayland rice** (Hyprland + Waybar) built for Arch Linux. The setup prioritizes performance (~120-150 MB RAM usage), minimalism, and clean aesthetics.
 
+**Note**: README.md incorrectly mentions Sway as the window manager - the actual setup uses **Hyprland**. This should be corrected in README.md.
+
 ## Installation & Setup
 
 ### Initial Installation
@@ -124,11 +126,15 @@ Module structure:
 - **Center**: window count, temperature, memory, cpu, distro, idle inhibitor, clock, network, bluetooth, system updates
 - **Right**: mpris, pulseaudio, backlight, battery, power menu
 
+**Important**: Waybar's wildcard includes are broken after v0.14.0 (see config.jsonc:1-5). Each module must be explicitly listed in the `include` array.
+
 When modifying Waybar:
 1. Edit individual module files in `modules/` or `modules/custom/`
-2. Add new modules to the `include` array in `config.jsonc`
-3. Styling changes go in `styles/` or `themes/`
-4. Restart Waybar: `killall waybar && waybar &`
+2. **If adding a new module**, you MUST add it to the `include` array in `config.jsonc` (wildcard imports don't work)
+3. Update the corresponding `modules-left`, `modules-center`, or `modules-right` arrays in `config.jsonc`
+4. Styling changes go in `styles/` or `themes/`
+5. Test for syntax errors: `jq . ~/.config/waybar/config.jsonc`
+6. Restart Waybar: `killall waybar && waybar &`
 
 ### Directory Structure
 ```
@@ -243,6 +249,12 @@ hyprctl version
 # View current configuration
 hyprctl monitors
 hyprctl workspaces
+
+# Check active keybinds
+hyprctl binds
+
+# Debug window issues
+hyprctl clients
 ```
 
 ### Waybar
@@ -256,6 +268,9 @@ jq . ~/.config/waybar/config.jsonc
 
 # Run in debug mode to see errors
 waybar --log-level debug
+
+# Test individual module files
+jq . ~/.config/waybar/modules/cpu.jsonc
 ```
 
 ### Neovim
@@ -263,6 +278,7 @@ After modifying Neovim configs:
 1. Restart Neovim
 2. Run `:Lazy sync` to sync plugins
 3. Run `:checkhealth` to verify setup
+4. Run `:Lazy restore` to restore plugins from lazy-lock.json
 
 ### Zsh
 After modifying `.zshrc`:
@@ -271,6 +287,9 @@ After modifying `.zshrc`:
 source ~/.zshrc
 
 # Or restart terminal
+
+# Clear Zinit cache if plugins aren't loading
+rm -rf ~/.local/share/zinit
 ```
 
 ### Applying Stow Changes
@@ -280,4 +299,67 @@ cd /path/to/dotfiles
 stow -v .          # Create/update symlinks
 stow -D .          # Remove symlinks (unstow)
 stow -R .          # Restow (remove then create)
+
+# If stow complains about existing files, backup and restow
+stow --adopt .     # Adopt existing files into the dotfiles repo
+```
+
+## Common Workflows
+
+### Updating Dotfiles After Git Pull
+After pulling changes from the repository:
+```bash
+cd ~/dotfiles
+git pull
+stow -R .          # Restow to update symlinks
+source ~/.zshrc    # Reload shell config
+hyprctl reload     # Reload Hyprland
+killall waybar && waybar &  # Restart Waybar
+```
+
+### Troubleshooting
+
+#### Waybar Not Starting
+```bash
+# Check for syntax errors
+jq . ~/.config/waybar/config.jsonc
+
+# Check logs
+journalctl --user -u waybar -f
+
+# Run in foreground to see errors
+waybar --log-level debug
+```
+
+#### Hyprland Issues
+```bash
+# Check Hyprland logs
+cat ~/.local/share/hyprland/hyprland.log
+
+# Verify syntax (will show errors if any)
+hyprctl reload
+
+# Kill and restart Hyprland
+hyprctl dispatch exit
+```
+
+#### Audio Not Working
+```bash
+# Check PipeWire status
+systemctl --user status pipewire pipewire-pulse wireplumber
+
+# Restart audio services
+systemctl --user restart pipewire pipewire-pulse wireplumber
+
+# Use pulsemixer to check audio devices
+pulsemixer
+```
+
+#### Network Issues
+```bash
+# Check NetworkManager status
+systemctl status NetworkManager
+
+# Use nmtui for network configuration
+nmtui
 ```

@@ -26,7 +26,7 @@ A carefully curated Wayland setup prioritizing **performance**, **minimalism**, 
 | Component | Tool | Why |
 |-----------|------|-----|
 | **Display Server** | Wayland | Modern, secure, smooth |
-| **Window Manager** | [Sway](https://github.com/swaywm/sway) | i3-compatible, stable, minimal |
+| **Window Manager** | [Hyprland](https://github.com/hyprwm/Hyprland) | Dynamic tiling Wayland compositor |
 | **Status Bar** | [Waybar](https://github.com/Alexays/Waybar) | Highly customizable, CSS theming |
 | **Launcher** | [Fuzzel](https://codeberg.org/dnkl/fuzzel) | Blazingly fast, minimal |
 | **Terminal** | [WezTerm](https://wezfurlong.org/wezterm/) | GPU-accelerated, cross-platform, Rust-based |
@@ -37,9 +37,9 @@ A carefully curated Wayland setup prioritizing **performance**, **minimalism**, 
 
 | Tool | Purpose |
 |------|---------|
-| **Swaylock** | Screen locking |
-| **Swayidle** | Idle management |
-| **Swaybg** | Wallpaper manager |
+| **Hyprlock** | Screen locking |
+| **Hypridle** | Idle management |
+| **Hyprpaper** | Wallpaper manager |
 | **Grim + Slurp** | Screenshots |
 | **Cliphist** | Clipboard history |
 | **yazi** | Modern TUI file manager |

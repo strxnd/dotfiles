@@ -58,6 +58,7 @@ alias c='clear'
 
 # Env vars
 export EDITOR=nvim
+export OPENCODE_ENABLE_EXPERIMENTAL_MODELS=true
 
 # Shell integrations
 eval "$(zoxide init --cmd cd zsh)"
