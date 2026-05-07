@@ -10,7 +10,7 @@ return {
   {
     "jay-babu/mason-nvim-dap.nvim",
     opts = {
-      ensure_installed = { "js", "codelldb" },
+      ensure_installed = { "codelldb" },
     },
   },
 }

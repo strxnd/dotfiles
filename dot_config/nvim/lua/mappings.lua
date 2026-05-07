@@ -3,7 +3,6 @@ local wk = require "which-key"
 wk.add {
   { "<leader>c", group = "code" },
   { "<leader>d", group = "debug" },
-  { "<leader>a", group = "ai" },
   { "<leader>f", group = "find" },
   { "<leader>w", group = "whichkey", icon = "󰌌" },
 }
@@ -40,7 +39,7 @@ map("n", "<leader>s", "<cmd>NvCheatsheet<CR>", { desc = "toggle nvcheatsheet" })
 
 map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "view code actions under cursor" })
 map("n", "<leader>cf", function()
-  require("conform").format { lsp_fallback = true }
+  require("conform").format { lsp_format = "fallback" }
 end, { desc = "general format file" })
 map("n", "<leader>cr", function()
   require "nvchad.lsp.renamer"()
@@ -58,7 +57,8 @@ map("n", "<leader>dc", function()
   require("dap").continue()
 end, { desc = "Run/Continue" })
 map("n", "<leader>da", function()
-  require("dap").continue { before = get_args }
+  local args = vim.fn.input "Run with args: "
+  require("dap").continue { args = vim.split(args, " ", { trimempty = true }) }
 end, { desc = "Run with Args" })
 map("n", "<leader>dC", function()
   require("dap").run_to_cursor()

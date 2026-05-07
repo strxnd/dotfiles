@@ -32,12 +32,7 @@ M.mason = {
   pkgs = {
     "clangd",
     "clang-format",
-    "rust-analyzer",
-    "rustfmt",
     "codelldb",
-    "typescript-language-server",
-    "js-debug-adapter",
-    "biome",
     "lua-language-server",
     "stylua",
   },
