@@ -4,6 +4,8 @@ return {
     ensure_installed = {
       "c",
       "lua",
+      "markdown",
+      "markdown_inline",
     },
   },
 }

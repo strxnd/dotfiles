@@ -17,7 +17,8 @@
 
 ## Desktop Dotfiles
 - Hyprland uses an end-4-style split config: `dot_config/hypr/hyprland.conf` sources category files under `dot_config/hypr/hyprland/`, empty override files under `dot_config/hypr/custom/`, plus `monitors.conf` and `workspaces.conf`.
-- Hyprland is hard-coded in `dot_config/hypr/monitors.conf` for monitor `DP-1` at `3480x2160@240` with scale `1.5`; check before changing display assumptions.
+- Hyprland is hard-coded in `dot_config/hypr/monitors.conf` for monitor `DP-1` at `3840x2160@240` with scale `1.5`; check before changing display assumptions.
 - `hyprlock.conf` references `~/.config/hypr/colors.conf` and `~/.config/hypr/bin/{location.sh,weather.sh,playerctlock.sh,infonlock.sh}`, but those files are not tracked here.
 - Waybar `config.jsonc` includes tracked module files under `dot_config/waybar/modules/`; keep those support files with the top-level config and style.
 - `dot_zshrc` bootstraps zinit and sources mise, oh-my-posh, and zoxide; avoid running an interactive shell just to validate syntax unless those dependencies are expected to exist.
+- Do not add `command -v` guards around shell integrations in `dot_zshrc`; these tools are expected dependencies.

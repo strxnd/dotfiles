@@ -35,13 +35,6 @@
       "actions": [
         {
           "active": false,
-          "command": "notify-send 'hey'",
-          "label": "󰤄",
-          "type": "toggle",
-          "update_command": "notify-send 'Hi'"
-        },
-        {
-          "active": false,
           "command": "swaync-client -d",
           "label": "",
           "type": "toggle"
