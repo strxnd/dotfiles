@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+
 PACMAN_PACKAGES=(
   base-devel
   git
@@ -77,6 +79,21 @@ require_arch() {
   fi
 }
 
+require_non_root() {
+  if (( EUID == 0 )); then
+    printf 'Run this installer as your user, not as root. It will use sudo when needed.\n' >&2
+    exit 1
+  fi
+}
+
+require_command() {
+  local command=$1
+  if ! command -v "$command" >/dev/null 2>&1; then
+    printf 'Missing required command: %s\n' "$command" >&2
+    exit 1
+  fi
+}
+
 ensure_yay() {
   if command -v yay >/dev/null 2>&1; then
     return
@@ -88,6 +105,8 @@ ensure_yay() {
   trap 'rm -rf "$tmpdir"' RETURN
   git clone https://aur.archlinux.org/yay-bin.git "$tmpdir/yay-bin"
   (cd "$tmpdir/yay-bin" && makepkg -si --noconfirm)
+  trap - RETURN
+  rm -rf "$tmpdir"
 }
 
 install_pacman_packages() {
@@ -109,6 +128,8 @@ enable_service() {
 
 main() {
   require_arch
+  require_non_root
+  require_command sudo
 
   section "Arch installer"
 
@@ -125,7 +146,7 @@ main() {
   enable_service docker.service
 
   if confirm "Apply chezmoi dotfiles now?"; then
-    chezmoi apply
+    chezmoi --source "$SCRIPT_DIR" apply
   fi
 
   section "Done"
