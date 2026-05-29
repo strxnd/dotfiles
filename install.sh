@@ -9,6 +9,8 @@ PACMAN_PACKAGES=(
   chezmoi
   zsh
   fzf
+  ripgrep
+  fd
   zoxide
   lsd
   fastfetch
@@ -16,7 +18,10 @@ PACMAN_PACKAGES=(
   btop
   lazygit
   github-cli
+  pi
+  tmux
   networkmanager
+  xdg-utils
   libnotify
   neovim
   tree-sitter-cli
@@ -26,6 +31,7 @@ PACMAN_PACKAGES=(
   hyprland
   hyprlock
   hyprpaper
+  xdg-desktop-portal-hyprland
   waybar
   swaync
   fuzzel
@@ -33,6 +39,7 @@ PACMAN_PACKAGES=(
   thunar
   grim
   slurp
+  wl-clipboard
   brightnessctl
   playerctl
   pavucontrol
@@ -41,6 +48,7 @@ PACMAN_PACKAGES=(
   bluez-utils
   pipewire-alsa
   pipewire-pulse
+  wireplumber
   pacman-contrib
   noto-fonts
   otf-commit-mono-nerd
