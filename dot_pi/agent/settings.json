@@ -1,0 +1,28 @@
+{
+  "lastChangelogVersion": "0.76.0",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.3-codex-spark",
+  "defaultThinkingLevel": "medium",
+  "enabledModels": [
+    "openai-codex/gpt-5.5",
+    "openai-codex/gpt-5.4-mini"
+  ],
+  "terminal": {
+    "showTerminalProgress": false
+  },
+  "enableInstallTelemetry": false,
+  "doubleEscapeAction": "tree",
+  "theme": "catppuccin-mocha",
+  "autocompleteMaxVisible": 5,
+  "editorPaddingX": 0,
+  "showHardwareCursor": false,
+  "packages": [
+    "npm:@aliou/pi-guardrails",
+    "npm:@vanillagreen/pi-web-tools",
+    "npm:@juicesharp/rpiv-btw",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@tintinweb/pi-subagents",
+    "npm:@haispeed/pi-obsidian"
+  ]
+}

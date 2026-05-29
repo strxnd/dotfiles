@@ -4,6 +4,7 @@ wk.add {
   { "<leader>c", group = "code" },
   { "<leader>d", group = "debug" },
   { "<leader>f", group = "find" },
+  { "<leader>o", group = "obsidian" },
   { "<leader>w", group = "whichkey", icon = "󰌌" },
 }
 

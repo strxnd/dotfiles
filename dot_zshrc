@@ -54,6 +54,7 @@ alias ls='lsd'
 alias c='clear'
 alias k='kubectl'
 alias q='pi -p'
+alias v='nvim'
 
 # Env vars
 export PATH="$HOME/.local/bin:$PATH"
