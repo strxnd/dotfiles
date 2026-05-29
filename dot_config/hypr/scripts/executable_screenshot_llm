@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# macOS-like area screenshot for LLM sharing:
+# - drag to select an area
+# - save to ~/Pictures/Screenshots
+# - update ~/Pictures/Screenshots/latest.png
+# - copy image to clipboard when wl-copy is available
+# - send a desktop notification when notify-send is available
+
+screenshot_dir="${XDG_PICTURES_DIR:-$HOME/Pictures}/Screenshots"
+timestamp="$(date +%Y%m%d-%H%M%S)"
+out="$screenshot_dir/screenshot-$timestamp.png"
+latest="$screenshot_dir/latest.png"
+
+notify() {
+  if command -v notify-send >/dev/null 2>&1; then
+    notify-send "$@"
+  fi
+}
+
+require_cmd() {
+  if ! command -v "$1" >/dev/null 2>&1; then
+    notify "Screenshot failed" "Missing required command: $1"
+    exit 1
+  fi
+}
+
+require_cmd grim
+require_cmd slurp
+mkdir -p "$screenshot_dir"
+
+# slurp exits non-zero when selection is cancelled.
+geometry="$(slurp)" || exit 0
+[ -n "$geometry" ] || exit 0
+
+grim -g "$geometry" "$out"
+ln -sfn "$out" "$latest"
+
+if command -v wl-copy >/dev/null 2>&1; then
+  wl-copy --type image/png < "$out"
+  notify "Screenshot copied" "$out"
+else
+  notify "Screenshot saved" "$out\nInstall wl-clipboard to also copy images."
+fi
+
+printf '%s\n' "$out"
