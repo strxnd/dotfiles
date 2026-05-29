@@ -3,73 +3,6 @@ set -euo pipefail
 
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 
-PACMAN_PACKAGES=(
-  base-devel
-  git
-  chezmoi
-  zsh
-  fzf
-  ripgrep
-  fd
-  zoxide
-  lsd
-  fastfetch
-  mise
-  btop
-  lazygit
-  github-cli
-  pi
-  tmux
-  networkmanager
-  xdg-utils
-  libnotify
-  neovim
-  tree-sitter-cli
-  bun
-  docker
-  flatpak
-  hyprland
-  hyprlock
-  hyprpaper
-  xdg-desktop-portal-hyprland
-  waybar
-  swaync
-  fuzzel
-  yazi
-  thunar
-  grim
-  slurp
-  wl-clipboard
-  brightnessctl
-  playerctl
-  pavucontrol
-  pulsemixer
-  bluez
-  bluez-utils
-  pipewire-alsa
-  pipewire-pulse
-  wireplumber
-  pacman-contrib
-  noto-fonts
-  otf-commit-mono-nerd
-  ttf-dejavu
-  ttf-jetbrains-mono-nerd
-  ttf-liberation
-  papirus-icon-theme
-  obsidian
-  steam
-  prismlauncher
-)
-
-AUR_PACKAGES=(
-  1password
-  helium-browser-bin
-  oh-my-posh-bin
-  spotify
-  ttf-apple-emoji
-  wezterm-git
-)
-
 confirm() {
   local prompt=${1:-Continue?}
   read -r -p "$prompt [y/N] " answer
@@ -80,82 +13,60 @@ section() {
   printf '\n==> %s\n' "$1"
 }
 
-require_arch() {
-  if [[ ! -f /etc/arch-release ]]; then
-    printf 'This installer is Arch-only for now.\n' >&2
+install_chezmoi_arch() {
+  if ! command -v sudo >/dev/null 2>&1; then
+    printf 'Missing required command: sudo\n' >&2
     exit 1
   fi
+  sudo pacman -S --needed chezmoi
 }
 
-require_non_root() {
-  if (( EUID == 0 )); then
-    printf 'Run this installer as your user, not as root. It will use sudo when needed.\n' >&2
-    exit 1
+install_chezmoi_darwin() {
+  if ! command -v brew >/dev/null 2>&1; then
+    if ! confirm "Homebrew is not installed. Install Homebrew now?"; then
+      printf 'Install Homebrew or chezmoi, then rerun this script.\n' >&2
+      exit 1
+    fi
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    if [[ -x /opt/homebrew/bin/brew ]]; then
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [[ -x /usr/local/bin/brew ]]; then
+      eval "$(/usr/local/bin/brew shellenv)"
+    fi
   fi
+  brew install chezmoi
 }
 
-require_command() {
-  local command=$1
-  if ! command -v "$command" >/dev/null 2>&1; then
-    printf 'Missing required command: %s\n' "$command" >&2
-    exit 1
-  fi
-}
-
-ensure_yay() {
-  if command -v yay >/dev/null 2>&1; then
+ensure_chezmoi() {
+  if command -v chezmoi >/dev/null 2>&1; then
     return
   fi
 
-  section "Installing yay-bin"
-  local tmpdir
-  tmpdir=$(mktemp -d)
-  trap 'rm -rf "$tmpdir"' RETURN
-  git clone https://aur.archlinux.org/yay-bin.git "$tmpdir/yay-bin"
-  (cd "$tmpdir/yay-bin" && makepkg -si --noconfirm)
-  trap - RETURN
-  rm -rf "$tmpdir"
-}
-
-install_pacman_packages() {
-  section "Installing pacman packages"
-  sudo pacman -S --needed --noconfirm "${PACMAN_PACKAGES[@]}"
-}
-
-install_aur_packages() {
-  section "Installing AUR packages"
-  yay -S --needed --noconfirm "${AUR_PACKAGES[@]}"
-}
-
-enable_service() {
-  local service=$1
-  if confirm "Enable and start $service?"; then
-    sudo systemctl enable --now "$service"
-  fi
+  section "Installing chezmoi"
+  case "$(uname -s)" in
+    Linux)
+      if [[ -f /etc/arch-release ]]; then
+        install_chezmoi_arch
+      else
+        printf 'Install chezmoi for this Linux distribution, then rerun this script.\n' >&2
+        exit 1
+      fi
+      ;;
+    Darwin)
+      install_chezmoi_darwin
+      ;;
+    *)
+      printf 'Unsupported OS: %s\n' "$(uname -s)" >&2
+      exit 1
+      ;;
+  esac
 }
 
 main() {
-  require_arch
-  require_non_root
-  require_command sudo
+  ensure_chezmoi
 
-  section "Arch installer"
-
-  if confirm "Update the system first?"; then
-    sudo pacman -Syu
-  fi
-
-  install_pacman_packages
-  ensure_yay
-  install_aur_packages
-
-  section "Optional services"
-  enable_service bluetooth.service
-  enable_service docker.service
-
-  if confirm "Apply chezmoi dotfiles now?"; then
-    chezmoi --source "$SCRIPT_DIR" apply
-  fi
+  section "Applying chezmoi dotfiles"
+  chezmoi --source "$SCRIPT_DIR" apply
 
   section "Done"
 }

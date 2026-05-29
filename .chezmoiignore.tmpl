@@ -1,0 +1,13 @@
+install.sh
+AGENTS.md
+
+{{- if ne .chezmoi.os "linux" }}
+.config/hypr
+.config/waybar
+.config/swaync
+.themes
+{{- end }}
+
+{{- if ne .chezmoi.os "darwin" }}
+# macOS-only target paths go here.
+{{- end }}

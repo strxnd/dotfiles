@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+set -euo pipefail
+{{ if ne .chezmoi.os "darwin" }}
+exit 0
+{{ end }}
+
+BREW_FORMULAE=(
+  git
+  chezmoi
+  zsh
+  fzf
+  ripgrep
+  fd
+  zoxide
+  lsd
+  fastfetch
+  mise
+  btop
+  lazygit
+  gh
+  pi-coding-agent
+  oh-my-posh
+  neovim
+  tree-sitter
+  bun
+  tmux
+  mas
+)
+
+BREW_CASKS=(
+  1password
+  docker
+  obsidian
+  spotify
+  wezterm
+  font-commit-mono-nerd-font
+  font-dejavu
+  font-jetbrains-mono-nerd-font
+  font-liberation
+)
+
+confirm() {
+  local prompt=${1:-Continue?}
+  read -r -p "$prompt [y/N] " answer
+  [[ $answer == [Yy] || $answer == [Yy][Ee][Ss] ]]
+}
+
+section() {
+  printf '\n==> %s\n' "$1"
+}
+
+ensure_homebrew() {
+  if command -v brew >/dev/null 2>&1; then
+    return
+  fi
+
+  if ! confirm "Homebrew is not installed. Install Homebrew now?"; then
+    printf 'Skipping macOS package installation because Homebrew is missing.\n' >&2
+    exit 0
+  fi
+
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [[ -x /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+}
+
+main() {
+  section "macOS package installer"
+  ensure_homebrew
+
+  section "Installing Homebrew formulae"
+  brew install "${BREW_FORMULAE[@]}"
+
+  section "Installing Homebrew casks"
+  brew install --cask "${BREW_CASKS[@]}"
+}
+
+main "$@"
