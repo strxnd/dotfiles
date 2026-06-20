@@ -7,7 +7,7 @@ return {
 		background = "black",
 	},
 	enable_tab_bar = false,
-	font_size = 15.0,
+	font_size = 13.0,
 	font = wezterm.font("JetBrains Mono Nerd Font"),
 
 	-- Cursor settings

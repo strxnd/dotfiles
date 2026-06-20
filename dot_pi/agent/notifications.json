@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "notifyWhen": "unfocused",
+  "cooldownMs": 1500,
+  "channels": {
+    "desktop": {
+      "enabled": true
+    },
+    "command": {
+      "enabled": false,
+      "argv": []
+    }
+  },
+  "triggers": {
+    "agentFinished": true,
+    "approvalNeeded": true,
+    "toolFailure": true
+  }
+}

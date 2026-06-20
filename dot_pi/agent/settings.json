@@ -1,28 +1,38 @@
 {
-  "lastChangelogVersion": "0.76.0",
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.3-codex-spark",
-  "defaultThinkingLevel": "medium",
-  "enabledModels": [
-    "openai-codex/gpt-5.5",
-    "openai-codex/gpt-5.4-mini"
+  "lastChangelogVersion": "0.79.8",
+  "quietStartup": true,
+  "packages": [
+    "npm:@tintinweb/pi-subagents@0.10.3",
+    "npm:@juicesharp/rpiv-web-tools@1.20.0",
+    "npm:@juicesharp/rpiv-btw@1.20.0",
+    "npm:@juicesharp/rpiv-args@1.20.0",
+    "npm:pi-claude-style-tools@1.0.58",
+    "npm:pi-mcp-adapter@2.10.0",
+    "npm:pi-paster@0.2.2",
+    "npm:@juicesharp/rpiv-ask-user-question@1.20.0"
   ],
+  "theme": "catppuccin-black",
+  "defaultThinkingLevel": "high",
   "terminal": {
+    "imageWidthCells": 120,
     "showTerminalProgress": false
   },
-  "enableInstallTelemetry": false,
-  "doubleEscapeAction": "tree",
-  "theme": "catppuccin-mocha",
-  "autocompleteMaxVisible": 5,
-  "editorPaddingX": 0,
   "showHardwareCursor": false,
-  "packages": [
-    "npm:@aliou/pi-guardrails",
-    "npm:@vanillagreen/pi-web-tools",
-    "npm:@juicesharp/rpiv-btw",
-    "npm:@juicesharp/rpiv-todo",
-    "npm:@juicesharp/rpiv-ask-user-question",
-    "npm:@tintinweb/pi-subagents",
-    "npm:@haispeed/pi-obsidian"
-  ]
+  "enableInstallTelemetry": false,
+  "defaultProjectTrust": "ask",
+  "doubleEscapeAction": "tree",
+  "warnings": {
+    "anthropicExtraUsage": true
+  },
+  "tui": "fullscreen",
+  "treeFilterMode": "default",
+  "editorPaddingX": 0,
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.5",
+  "steeringMode": "one-at-a-time",
+  "followUpMode": "one-at-a-time",
+  "transport": "auto",
+  "httpIdleTimeoutMs": 300000,
+  "hideThinkingBlock": true,
+  "collapseChangelog": false
 }

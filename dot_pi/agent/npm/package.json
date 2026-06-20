@@ -2,12 +2,13 @@
   "name": "pi-extensions",
   "private": true,
   "dependencies": {
-    "@aliou/pi-guardrails": "^0.13.1",
-    "@haispeed/pi-obsidian": "^0.1.1",
-    "@juicesharp/rpiv-ask-user-question": "^1.15.0",
-    "@juicesharp/rpiv-btw": "^1.15.0",
-    "@juicesharp/rpiv-todo": "^1.15.0",
-    "@tintinweb/pi-subagents": "^0.8.0",
-    "@vanillagreen/pi-web-tools": "^1.3.0"
+    "@juicesharp/rpiv-args": "^1.20.0",
+    "@juicesharp/rpiv-ask-user-question": "^1.20.0",
+    "@juicesharp/rpiv-btw": "^1.20.0",
+    "@juicesharp/rpiv-web-tools": "^1.20.0",
+    "@tintinweb/pi-subagents": "^0.10.3",
+    "pi-claude-style-tools": "^1.0.58",
+    "pi-mcp-adapter": "^2.10.0",
+    "pi-paster": "^0.2.2"
   }
 }

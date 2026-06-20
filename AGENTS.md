@@ -21,7 +21,7 @@
 - `dot_config/swaync/`: SwayNC notification center config.
 - `dot_config/wezterm/`: WezTerm config.
 - `dot_config/oh-my-posh/`: prompt theme/config.
-- `dot_pi/agent/`: pi global settings, custom agents, prompt templates, theme, and extension package manifests.
+- `dot_pi/`: pi settings, agent settings, extensions, themes, and extension package manifests.
 - `dot_themes/`: Linux desktop theme assets; ignored on non-Linux via `.chezmoiignore.tmpl`.
 - `dot_zshrc`: zsh setup, aliases, expected shell integrations, and startup commands.
 - `install.sh`: bootstrap only; keep package lists in the OS-specific `run_onchange_before_*` scripts.
@@ -93,9 +93,9 @@
 - Avoid launching an interactive shell just to validate syntax unless dependencies are expected to exist. Use `zsh -n dot_zshrc` for syntax checks.
 
 ## pi Configuration
-- Global pi config is tracked under `dot_pi/agent/`.
+- Global pi config is tracked under `dot_pi/settings.json` and `dot_pi/agent/`.
 - Do not track or print runtime/sensitive pi files such as `auth.json`, `run-history.jsonl`, `sessions/`, or `node_modules/`.
-- Custom agents live in `dot_pi/agent/agents/`; prompt templates live in `dot_pi/agent/prompts/`; themes live in `dot_pi/agent/themes/`.
+- Pi extensions live in `dot_pi/agent/extensions/`; themes live in `dot_pi/agent/themes/`.
 - If changing pi extension dependencies, update both `dot_pi/agent/npm/package.json` and `dot_pi/agent/npm/package-lock.json` deliberately.
 - After changing `AGENTS.md` or pi config files, remind the user to run `/reload` in pi.
 
