@@ -86,7 +86,7 @@ function cwdLabel(ctx: ExtensionContext): string {
 		if (path.startsWith("~")) return path;
 	}
 
-	// macOS often resolves /tmp and /var through /private; Claude Code-style paths
+	// macOS often resolves /tmp and /var through /private; Pi-style paths
 	// display the shell-friendly location instead.
 	path = substitutePathPrefix(path, "/private/tmp", "/tmp");
 	path = substitutePathPrefix(path, "/private/var", "/var");
@@ -323,7 +323,7 @@ function installDashboardHeader(ctx: ExtensionContext): void {
 	}));
 }
 
-export default function claudeStyleDashboard(pi: ExtensionAPI) {
+export default function piDashboard(pi: ExtensionAPI) {
 	pi.on("session_start", async (_event, ctx) => {
 		if (ctx.mode !== "tui") return;
 		installDashboardHeader(ctx);

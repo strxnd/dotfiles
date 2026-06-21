@@ -7,7 +7,7 @@
     "@juicesharp/rpiv-btw": "^1.20.0",
     "@juicesharp/rpiv-web-tools": "^1.20.0",
     "@tintinweb/pi-subagents": "^0.10.3",
-    "pi-claude-style-tools": "^1.0.58",
+    "pi-claude-style-tools": "^1.0.59",
     "pi-mcp-adapter": "^2.10.0",
     "pi-paster": "^0.2.2"
   }

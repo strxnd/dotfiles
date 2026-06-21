@@ -1,0 +1,16 @@
+{
+  "version": 5,
+  "mode": "default",
+  "permissions": {
+    "allow": [],
+    "ask": [],
+    "deny": []
+  },
+  "autoMode": {
+    "classifierModel": "openai-codex/gpt-5.4-mini",
+    "classifierThinkingLevel": "low"
+  },
+  "mainEditor": {
+    "vimMode": false
+  }
+}

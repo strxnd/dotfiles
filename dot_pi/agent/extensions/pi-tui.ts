@@ -74,7 +74,7 @@ function parseRenderer(raw: string): TuiRenderer | undefined {
 }
 
 function alternateScreenDisabled(): boolean {
-	const value = process.env.PI_TUI_DISABLE_ALTERNATE_SCREEN ?? process.env.CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN;
+	const value = process.env.PI_TUI_DISABLE_ALTERNATE_SCREEN;
 	return value === "1" || value?.toLowerCase() === "true";
 }
 
@@ -295,7 +295,7 @@ function formatSetMessage(renderer: TuiRenderer, applied: boolean): string {
 	if (renderer === "fullscreen") {
 		const suffix = applied
 			? "Entered alternate-screen rendering for this session. Mouse wheel and PageUp/PageDown scroll the transcript; Up/Down stay in the prompt editor."
-			: "Saved preference; alternate screen is disabled by PI_TUI_DISABLE_ALTERNATE_SCREEN/CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN.";
+			: "Saved preference; alternate screen is disabled by PI_TUI_DISABLE_ALTERNATE_SCREEN.";
 		return `Renderer set to fullscreen. ${suffix}`;
 	}
 	return applied ? "Renderer set to default. Returned to normal scrollback rendering." : "Renderer set to default.";

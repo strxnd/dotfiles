@@ -1,6 +1,6 @@
 {
   "themeAdaptive": true,
-  "toolBackground": "transparent",
+  "toolBackground": "outlines",
   "groupToolCalls": true,
   "extraToolOutputExpanded": false
 }

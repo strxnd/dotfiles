@@ -3,8 +3,8 @@ import { Container, truncateToWidth, visibleWidth } from "@earendil-works/pi-tui
 
 const USER_MESSAGE_MARKER = "❯";
 const PATCH_VERSION = `direct-v3-${USER_MESSAGE_MARKER}`;
-const PATCHED = Symbol.for("pi-user-message:claude-strip-patched");
-const CLAUDE_STYLE_TOOLS_USER_PATCHED = Symbol.for("pi-claude-style-tools:patched-user-message-render");
+const PATCHED = Symbol.for("pi-user-message:strip-patched");
+const STYLE_TOOLS_USER_PATCHED = Symbol.for("pi-user-message:patched-user-message-render");
 const OSC133_ZONE_START = "\x1b]133;A\x07";
 const OSC133_ZONE_END = "\x1b]133;B\x07";
 const OSC133_ZONE_FINAL = "\x1b]133;C\x07";
@@ -41,10 +41,9 @@ function fullWidthBar(content: string, width: number): string {
 }
 
 function renderBaseUserContent(instance: UserMessageComponent, width: number): string[] {
-	// Bypass UserMessageComponent.prototype.render entirely. That method is what
-	// pi-claude-style-tools patches into a rounded user box; Container.render
+	// Bypass UserMessageComponent.prototype.render entirely. Container.render
 	// still renders the component's real children (Box -> Markdown) so we can
-	// extract just the message text and draw our own Claude-style strip.
+	// extract just the message text and draw our own Pi-style strip.
 	try {
 		return Container.prototype.render.call(instance, Math.max(1, width)) as string[];
 	} catch {
@@ -55,12 +54,12 @@ function renderBaseUserContent(instance: UserMessageComponent, width: number): s
 function installPatch(): void {
 	const proto = UserMessageComponent.prototype as UserMessageComponent & {
 		[PATCHED]?: string;
-		[CLAUDE_STYLE_TOOLS_USER_PATCHED]?: boolean;
+		[STYLE_TOOLS_USER_PATCHED]?: boolean;
 		render(width: number): string[];
 	};
 	if (proto[PATCHED] === PATCH_VERSION && (proto.render as any)[PATCHED] === PATCH_VERSION) return;
 
-	const renderClaudeLikeUserMessage = function renderClaudeLikeUserMessage(this: UserMessageComponent, width: number): string[] {
+	const renderPiLikeUserMessage = function renderPiLikeUserMessage(this: UserMessageComponent, width: number): string[] {
 		const rawLines = renderBaseUserContent(this, width);
 		const contentLines = rawLines
 			.map(stripOuterUserBoxStyling)
@@ -77,16 +76,15 @@ function installPatch(): void {
 		rendered[rendered.length - 1] = OSC133_ZONE_END + OSC133_ZONE_FINAL + rendered[rendered.length - 1];
 		return rendered;
 	};
-	(renderClaudeLikeUserMessage as any)[PATCHED] = PATCH_VERSION;
-	proto.render = renderClaudeLikeUserMessage;
+	(renderPiLikeUserMessage as any)[PATCHED] = PATCH_VERSION;
+	proto.render = renderPiLikeUserMessage;
 
-	// If pi-claude-style-tools loads after this extension, make its user-message
-	// patch no-op. If it loaded before, our direct render replacement above wins.
-	proto[CLAUDE_STYLE_TOOLS_USER_PATCHED] = true;
+	// Mark the user-message renderer as patched so later local overrides can no-op.
+	proto[STYLE_TOOLS_USER_PATCHED] = true;
 	proto[PATCHED] = PATCH_VERSION;
 }
 
-export default function claudeLikeUserMessageExtension(pi: ExtensionAPI) {
+export default function piLikeUserMessageExtension(pi: ExtensionAPI) {
 	installPatch();
 	// Re-apply on session_start and the next tick so this override wins even if
 	// another extension re-patches UserMessageComponent during startup/reload.
