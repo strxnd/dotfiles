@@ -4,6 +4,10 @@ set -euo pipefail
 exit 0
 {{ end }}
 
+BREW_TAPS=(
+  oven-sh/bun
+)
+
 BREW_FORMULAE=(
   git
   chezmoi
@@ -22,7 +26,7 @@ BREW_FORMULAE=(
   oh-my-posh
   neovim
   tree-sitter
-  bun
+  oven-sh/bun/bun
   tmux
   mas
 )
@@ -72,11 +76,16 @@ main() {
   section "macOS package installer"
   ensure_homebrew
 
+  section "Installing Homebrew taps"
+  for tap in "${BREW_TAPS[@]}"; do
+    brew tap "$tap"
+  done
+
   section "Installing Homebrew formulae"
   brew install "${BREW_FORMULAE[@]}"
 
   section "Installing Homebrew casks"
-  brew install --cask "${BREW_CASKS[@]}"
+  brew install --cask --adopt "${BREW_CASKS[@]}"
 }
 
 main "$@"
