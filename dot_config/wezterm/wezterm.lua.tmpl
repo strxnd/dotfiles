@@ -7,8 +7,8 @@ return {
 		background = "black",
 	},
 	enable_tab_bar = false,
-	font_size = 13.0,
-	font = wezterm.font("JetBrains Mono Nerd Font"),
+	font_size = {{ if eq .chezmoi.os "darwin" }}15.0{{ else }}13.0{{ end }},
+	font = wezterm.font("{{ if eq .chezmoi.os "darwin" }}JetBrainsMono Nerd Font{{ else }}JetBrains Mono Nerd Font{{ end }}"),
 
 	-- Cursor settings
 	default_cursor_style = "BlinkingBlock",
