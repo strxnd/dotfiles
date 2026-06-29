@@ -75,9 +75,9 @@
 
 ## Obsidian / Neovim
 - Obsidian.nvim config lives at `dot_config/nvim/lua/plugins/obsidian.lua`.
-- The configured vault workspace is `~/dev/second-brain` with minimal PARA folders. Do not edit the vault itself from this repo.
-- Do not add Inbox, Maps, Attachments, or daily-note workflows unless explicitly requested.
-- Templates are expected under the vault's `Templates/` folder.
+- The configured vault workspace is `~/personal-os` with PARA folders. Do not edit the vault itself from this repo.
+- New notes default to `0. Inbox`; daily notes go under `0. Inbox/Daily Notes`.
+- Templates are expected under the vault's `9. System/Templates` folder.
 
 ## Desktop Dotfiles
 - Hyprland uses an end-4-style split config: `dot_config/hypr/hyprland.conf` sources category files under `dot_config/hypr/hyprland/`, empty override files under `dot_config/hypr/custom/`, plus `monitors.conf` and `workspaces.conf`.

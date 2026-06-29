@@ -1,0 +1,66 @@
+{
+  "name": "lazypi",
+  "version": "0.1.0",
+  "description": "A bundled Pi extension harness with local workflow extensions and vendored Pi packages.",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "pi",
+    "pi-package",
+    "pi-extension",
+    "agent",
+    "harness"
+  ],
+  "files": [
+    "index.ts",
+    "local/**/*.ts",
+    "vendor/**/*.ts",
+    "vendor/**/*.json",
+    "vendor/**/README.md",
+    "vendor/**/CHANGELOG.md",
+    "vendor/**/LICENSE",
+    "vendor/**/*.txt",
+    "vendor/pi-mcp-adapter/*.js",
+    "vendor/pi-mcp-adapter/banner.png",
+    "vendor/pi-paster/docs/preview.png",
+    "README.md",
+    "vendor-manifest.json"
+  ],
+  "scripts": {
+    "pack:dry-run": "npm pack --dry-run"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/ext-apps": "^1.2.2",
+    "@modelcontextprotocol/sdk": "^1.25.1",
+    "@shikijs/cli": "^4.0.2",
+    "diff": "^9.0.0",
+    "open": "^10.2.0",
+    "recheck": "^4.5.0",
+    "typebox": "^1.1.24",
+    "zod": "^3.25.0 || ^4.0.0"
+  },
+  "optionalDependencies": {
+    "sharp": "^0.34.0"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": ">=0.74.0",
+    "@earendil-works/pi-coding-agent": ">=0.74.0",
+    "@earendil-works/pi-tui": ">=0.74.0"
+  },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-ai": {
+      "optional": true
+    },
+    "@earendil-works/pi-coding-agent": {
+      "optional": true
+    },
+    "@earendil-works/pi-tui": {
+      "optional": true
+    }
+  },
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
+  }
+}

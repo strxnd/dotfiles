@@ -1,18 +1,9 @@
 {
-  "lastChangelogVersion": "0.79.8",
+  "lastChangelogVersion": "0.80.2",
   "quietStartup": true,
-  "packages": [
-    "npm:@tintinweb/pi-subagents@0.10.3",
-    "npm:@juicesharp/rpiv-web-tools@1.20.0",
-    "npm:@juicesharp/rpiv-btw@1.20.0",
-    "npm:@juicesharp/rpiv-args@1.20.0",
-    "npm:pi-mcp-adapter@2.10.0",
-    "npm:pi-paster@0.2.2",
-    "npm:@juicesharp/rpiv-ask-user-question@1.20.0",
-    "npm:pi-claude-style-tools@1.0.59"
-  ],
+  "packages": [],
   "theme": "catppuccin-black",
-  "defaultThinkingLevel": "xhigh",
+  "defaultThinkingLevel": "high",
   "terminal": {
     "imageWidthCells": 120,
     "showTerminalProgress": false

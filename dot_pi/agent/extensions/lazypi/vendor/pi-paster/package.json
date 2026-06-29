@@ -1,0 +1,63 @@
+{
+  "name": "pi-paster",
+  "version": "0.2.2",
+  "description": "Pi extension that turns pasted image paths into first-class image attachments.",
+  "keywords": [
+    "image-attachments",
+    "pi-extension",
+    "pi-package"
+  ],
+  "homepage": "https://github.com/beowulf11/pi-paster#readme",
+  "bugs": {
+    "url": "https://github.com/beowulf11/pi-paster/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beowulf11/pi-paster.git"
+  },
+  "files": [
+    "dist",
+    "src",
+    "docs",
+    "README.md"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "dev": "vp pack --watch",
+    "test": "vp test",
+    "check": "vp check",
+    "prepare": "vp config",
+    "prepublishOnly": "vp run build"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "^0.74.0",
+    "@earendil-works/pi-tui": "^0.74.0",
+    "@types/node": "^25.8.0",
+    "@typescript/native-preview": "7.0.0-dev.20260515.1",
+    "typescript": "^6.0.3",
+    "vite-plus": "catalog:"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*"
+  },
+  "optionalDependencies": {
+    "sharp": "^0.34.0"
+  },
+  "packageManager": "pnpm@11.1.2",
+  "pi": {
+    "extensions": [
+      "./src/index.ts"
+    ],
+    "image": "https://unpkg.com/pi-paster@0.2.2/docs/preview.png"
+  }
+}

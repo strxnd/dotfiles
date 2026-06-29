@@ -1,0 +1,66 @@
+{
+  "packages": [
+    {
+      "name": "pi-claude-style-tools",
+      "version": "1.0.59",
+      "path": "vendor/pi-claude-style-tools",
+      "license": "MIT",
+      "source": "https://github.com/FammasMaz/pi-cc-tools"
+    },
+    {
+      "name": "pi-mcp-adapter",
+      "version": "2.10.0",
+      "path": "vendor/pi-mcp-adapter",
+      "license": "MIT",
+      "source": "https://github.com/nicobailon/pi-mcp-adapter"
+    },
+    {
+      "name": "pi-paster",
+      "version": "0.2.2",
+      "path": "vendor/pi-paster",
+      "license": "MIT",
+      "source": "https://github.com/beowulf11/pi-paster",
+      "localPatches": [
+        "Pruned dist output; lazypi imports src/index.ts directly."
+      ]
+    },
+    {
+      "name": "@juicesharp/rpiv-args",
+      "version": "1.20.0",
+      "path": "vendor/juicesharp/rpiv-args",
+      "license": "MIT",
+      "source": "https://github.com/juicesharp/rpiv"
+    },
+    {
+      "name": "@juicesharp/rpiv-ask-user-question",
+      "version": "1.20.0",
+      "path": "vendor/juicesharp/rpiv-ask-user-question",
+      "license": "MIT",
+      "source": "https://github.com/juicesharp/rpiv"
+    },
+    {
+      "name": "@juicesharp/rpiv-btw",
+      "version": "1.20.0",
+      "path": "vendor/juicesharp/rpiv-btw",
+      "license": "MIT",
+      "source": "https://github.com/juicesharp/rpiv"
+    },
+    {
+      "name": "@juicesharp/rpiv-config",
+      "version": "1.20.0",
+      "path": "vendor/juicesharp/rpiv-config",
+      "license": "MIT",
+      "source": "https://github.com/juicesharp/rpiv"
+    },
+    {
+      "name": "@juicesharp/rpiv-web-tools",
+      "version": "1.20.0",
+      "path": "vendor/juicesharp/rpiv-web-tools",
+      "license": "MIT",
+      "source": "https://github.com/juicesharp/rpiv",
+      "localPatches": [
+        "Imports @juicesharp/rpiv-config through the vendored relative path."
+      ]
+    }
+  ]
+}
