@@ -1,0 +1,16 @@
+# Catppuccin Mocha palette with a black base.
+theme = Catppuccin Mocha
+background = #000000
+foreground = #cdd6f4
+cursor-color = #f5e0dc
+cursor-text = #000000
+selection-background = #313244
+selection-foreground = #cdd6f4
+
+cursor-style = block
+cursor-style-blink = true
+background-opacity = 1
+
+keybind = shift+enter=text:\x1b\r
+
+config-file = ?platform.ghostty

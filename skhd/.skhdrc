@@ -1,0 +1,42 @@
+# Hyprland-style bindings for macOS.
+# Hyprland SUPER -> macOS alt.
+
+# Apps and system panels.
+alt - return : open -na Ghostty
+alt - e      : hypr-mac-file-manager
+alt - n      : hypr-mac-notifications
+ctrl + alt - m : hypr-mac-toggle-menubar
+
+# Windows.
+alt - q : yabai -m window --close
+alt - v : yabai -m window --toggle float
+alt - f : yabai -m window --toggle zoom-fullscreen
+alt - t : yabai -m window --toggle split
+shift + alt - l : osascript -e 'tell application "System Events" to keystroke "q" using {control down, command down}'
+
+# Focus with vim keys.
+alt - h : yabai -m window --focus west
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - l : yabai -m window --focus east
+
+# Workspaces.
+alt - 1 : yabai -m space --focus 1
+alt - 2 : yabai -m space --focus 2
+alt - 3 : yabai -m space --focus 3
+alt - 4 : yabai -m space --focus 4
+alt - 5 : yabai -m space --focus 5
+
+# Move active window to workspace.
+shift + alt - 1 : yabai -m window --space 1
+shift + alt - 2 : yabai -m window --space 2
+shift + alt - 3 : yabai -m window --space 3
+shift + alt - 4 : yabai -m window --space 4
+shift + alt - 5 : yabai -m window --space 5
+
+# Hyprland has SUPER+ALT+S for screenshots; with alt as SUPER,
+# ctrl+alt+s is the clean macOS equivalent.
+ctrl + alt - s : hypr-mac-screenshot
+
+# Not bound: SUPER+M exits Hyprland, SUPER+P is dwindle pseudo, and
+# SUPER+S uses Hyprland's special workspace. Yabai has no exact equivalent.
