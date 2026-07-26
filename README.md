@@ -18,20 +18,12 @@ brew install stow          # macOS
 sudo pacman -S stow        # Arch Linux
 ```
 
-Stow the packages for the current platform.
-
-### macOS
+Stow the packages for the current platform:
 
 ```sh
-stow fastfetch ghostty ghostty-macos nvim oh-my-posh skhd zsh
+./setup.sh
 ```
 
-### Arch Linux
-
-```sh
-stow fastfetch fuzzel ghostty ghostty-linux hypr nvim oh-my-posh swaync waybar zsh
-```
-
-Stow links each package into `$HOME`. Preview changes with `stow --no --verbose <packages>` and remove links with `stow --delete <packages>`.
+The script detects macOS or Linux and links the matching packages into `$HOME`. Preview individual packages with `stow --no --verbose <packages>` and remove links with `stow --delete <packages>`.
 
 Package installation and system configuration are intentionally separate from Stow.
