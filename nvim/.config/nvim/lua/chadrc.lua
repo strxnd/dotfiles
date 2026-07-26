@@ -30,11 +30,17 @@ M.ui = {
 
 M.mason = {
   pkgs = {
+    "biome",
     "clangd",
     "clang-format",
     "codelldb",
+    "css-lsp",
+    "html-lsp",
+    "json-lsp",
     "lua-language-server",
     "stylua",
+    "tailwindcss-language-server",
+    "vtsls",
   },
 }
 
