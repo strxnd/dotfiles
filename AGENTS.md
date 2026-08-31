@@ -1,20 +1,21 @@
 # Agent Notes
 
 ## Repository Purpose and Shape
-- This is a personal macOS and Arch Linux dotfiles repository managed with GNU Stow.
+- This is a personal macOS and Omarchy/Arch Linux dotfiles repository managed with GNU Stow.
 - Each top-level application directory is a Stow package whose contents mirror paths under `$HOME`.
   - `nvim/.config/nvim/...` links to `~/.config/nvim/...`.
   - `zsh/.zshrc` links to `~/.zshrc`.
   - `skhd/.skhdrc` links to `~/.skhdrc`.
 - `.stowrc` targets the repository parent, so the expected repository location is `~/dotfiles`.
-- Package installation and system configuration are deliberately separate from Stow.
+- Track portable user overrides only. Do not add Omarchy stock files, `monitors.lua`, first-boot invitation hooks, generated theme state, browser profiles, or secrets.
+- Package installation is separate from Stow. `setup.sh` only backs up colliding regular files and restows.
 - There is no CI or repo-wide test runner. Validate the specific tool/config changed.
 
 ## Packages
-- Common packages: `fastfetch`, `ghostty`, `nvim`, `oh-my-posh`, and `zsh`.
-- macOS packages: `ghostty-macos` and `skhd`.
-- Linux packages: `fuzzel`, `ghostty-linux`, `hypr`, `swaync`, and `waybar`.
-- `ghostty` contains shared configuration; stow exactly one platform package to provide `platform.ghostty`.
+- Common: `git`, `mise`, `nvim`, `oh-my-posh`, `zsh`.
+- Omarchy/Linux: `ghostty-linux`, `hypr` (`bindings.lua` only), `omarchy` (`shell.json`, `shell.toml`, `defaults/agent`).
+- macOS: `ghostty`, `ghostty-macos`, `skhd`.
+- Legacy Waybar, SwayNC, Fuzzel, and Hyprland `.conf` packages are gone. Do not re-add them.
 
 ## Common Workflow
 - Check current work before editing: `git status --short`.
@@ -48,16 +49,16 @@
 - Templates are expected under the vault's `9. System/Templates` folder.
 
 ## Desktop Dotfiles
-- Hyprland uses a split config under `hypr/.config/hypr/`, with category files in `hyprland/`, overrides in `custom/`, plus `monitors.conf` and `workspaces.conf`.
-- Monitor assumptions are hard-coded in `hypr/.config/hypr/monitors.conf` for `DP-1` at `3840x2160@240` with scale `1.5`; check before changing display assumptions.
-- `hyprlock.conf` references `~/.config/hypr/colors.conf` and scripts under `~/.config/hypr/bin/`; verify support files before editing related behavior.
-- Waybar config includes modules under `waybar/.config/waybar/modules/`; keep module, script, style, and asset changes consistent.
+- Linux Hyprland overrides belong in `hypr/.config/hypr/`. Only ship files that differ from Omarchy's packaged defaults. `monitors.lua` is machine-local and must not be stowed.
+- Omarchy shell, font size, and default agent belong in the `omarchy` package. Edit those files here, then restow `omarchy`. Do not copy `/usr/share/omarchy/` into the repo.
+- Linux Ghostty is `ghostty-linux` (Omarchy theme include, font size 11). macOS Ghostty is `ghostty` plus `ghostty-macos`.
+- `skhd` is macOS-only. Yabai config and `hypr-mac-*` helper scripts are not in this repository yet; add them from the Air when editing there.
 - Executable scripts must retain executable mode.
-- Do not stow Linux desktop packages on macOS.
 
 ## Shell Configuration
 - `zsh/.zshrc` bootstraps zinit and sources mise, oh-my-posh, and zoxide.
 - Do not add `command -v` guards around these expected shell integrations.
+- Paths under `$HOME` must stay portable across Linux and macOS. Do not hardcode `/home/kumar`.
 - Validate syntax with `zsh -n zsh/.zshrc`; do not launch an interactive shell solely for validation.
 
 ## Safety and Secrets

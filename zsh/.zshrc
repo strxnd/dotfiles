@@ -65,3 +65,18 @@ eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.toml)"
 eval "$(mise activate zsh)"
 
 fastfetch
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:$HOME/.lmstudio/bin"
+# End of LM Studio CLI section
+
+uv_env="$HOME/.local/bin/env"
+[[ -f $uv_env ]] && . "$uv_env"
+
+# pnpm
+export PNPM_HOME="$HOME/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
