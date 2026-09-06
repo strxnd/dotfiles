@@ -44,10 +44,10 @@
           "id": "omarchy.network"
         },
         {
-          "id": "omarchy.audio"
+          "id": "omarchy.power"
         },
         {
-          "id": "omarchy.power"
+          "id": "omarchy.audio"
         },
         {
           "id": "omarchy.monitor"
