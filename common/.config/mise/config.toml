@@ -7,3 +7,6 @@ node = "latest"
 opencode = "latest"
 pi = "latest"
 python = "latest"
+
+[settings.upgrade]
+auto_prune = false

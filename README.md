@@ -6,14 +6,13 @@ The repo tracks portable user overrides only. Omarchy still owns stock Hyprland
 files, themes, first-boot hooks, and generated theme state. Machine-specific
 files such as `~/.config/hypr/monitors.lua` stay on the machine.
 
-## Packages
+## Layout
 
-Shared: `git`, `mise`, `nvim`, `oh-my-posh`, `zsh`.
+- `common`: shared Git, mise, Neovim, Oh My Posh, tmux, and Zsh config.
+- `darwin`: macOS Ghostty config.
+- `linux`: Omarchy/Linux Ghostty, Hyprland, and Omarchy config.
 
-Omarchy/Linux: `ghostty-linux`, `hypr` (vim-style binds), `omarchy` (shell bar,
-font size, default agent).
-
-macOS: `ghostty`, `ghostty-macos`, `skhd`.
+Each folder is a Stow package whose contents mirror paths under `$HOME`.
 
 ## Setup
 
@@ -31,14 +30,19 @@ brew install stow          # macOS
 sudo pacman -S stow        # Arch Linux
 ```
 
-Link the packages for this OS:
+Link the packages for your OS:
 
 ```sh
-./setup.sh
+# Omarchy/Linux
+stow --restow common linux
+
+# macOS
+stow --restow common darwin
 ```
 
-`setup.sh` backs up any regular file that would collide, then restows. Preview
-with `stow --no --verbose <packages>` and unlink with `stow --delete <packages>`.
+Preview with `stow --no --verbose common linux` (or `common darwin`) and unlink
+with `stow --delete <packages>`. Stow will stop if an existing regular file
+would be overwritten.
 
 Install packages yourself. On a new Omarchy box, also set the look this machine
 uses:
