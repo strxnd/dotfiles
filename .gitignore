@@ -1,3 +1,4 @@
 *.bak.*
 .DS_Store
-linux/.config/mango/local.conf
+mango/.config/mango/local.conf
+kitty/.config/kitty/local.conf

@@ -2,22 +2,24 @@
 set -eu
 
 case "${1:-}" in
-  '') dry_run=false ;;
-  -n|--dry-run) dry_run=true ;;
+  '') dry_run=false; spicetify_only=false ;;
+  -n|--dry-run) dry_run=true; spicetify_only=false ;;
+  --spicetify) dry_run=false; spicetify_only=true ;;
   -h|--help)
-    printf '%s\n' 'Usage: ./install.sh [--dry-run]' 'Interactive Arch Linux setup. Package-manager confirmations are handled by this script.'
+    printf '%s\n' 'Usage: ./install.sh [--dry-run|--spicetify]' 'Interactive Arch Linux setup. --spicetify applies the theme after you sign in to Spotify.'
     exit 0
     ;;
   *) printf 'Unknown option: %s\n' "$1" >&2; exit 2 ;;
 esac
-[ "$#" -le 1 ] || { printf '%s\n' 'Usage: ./install.sh [--dry-run]' >&2; exit 2; }
+[ "$#" -le 1 ] || { printf '%s\n' 'Usage: ./install.sh [--dry-run|--spicetify]' >&2; exit 2; }
 
 if [ "$(uname -s)" != Linux ] || [ ! -f /etc/arch-release ] || ! command -v pacman >/dev/null 2>&1; then
-  printf '%s\n' 'This installer supports Arch Linux only. On macOS, Stow common and darwin manually.' >&2
+  printf '%s\n' 'This installer supports Arch Linux only. On macOS, Stow the packages you want manually.' >&2
   exit 1
 fi
 [ "$(id -u)" -ne 0 ] || { printf '%s\n' 'Run this as your user, not with sudo.' >&2; exit 1; }
 CDPATH= cd -- "$(dirname -- "$0")"
+set -- zsh mise nvim oh-my-posh kitty mango quickshell kvantum qt-theme gtk qt5ct qt6ct xsettingsd
 
 if [ "$dry_run" = true ]; then
   printf '%s\n' \
@@ -27,13 +29,11 @@ if [ "$dry_run" = true ]; then
     '4. Build tools, yay-bin AUR helper, appearance, Spotify, and Spicetify.' \
     '5. MangoWC, Quickshell, Kitty, and desktop tools.' \
     '6. Neovim, then Zsh and its prompt/tools.' \
-    '7. Preview and optionally link common and linux dotfiles.' \
+    '7. Preview and optionally link the Arch Linux dotfile packages.' \
     'No packages, services, repositories, or links change in a dry run.'
-  if command -v stow >/dev/null 2>&1; then stow --no --verbose --restow common linux; fi
+  if command -v stow >/dev/null 2>&1; then stow --no --verbose --restow "$@"; fi
   exit 0
 fi
-
-[ -t 0 ] || { printf '%s\n' 'An interactive terminal is required for confirmations.' >&2; exit 1; }
 
 confirm() {
   while :; do
@@ -99,6 +99,66 @@ has_nvidia_gpu() {
   done
   return 1
 }
+
+setup_spicetify() {
+  command -v spicetify >/dev/null || { printf '%s\n' 'Install spicetify-cli first.' >&2; return 1; }
+  command -v curl >/dev/null || { printf '%s\n' 'Install curl first.' >&2; return 1; }
+
+  spotify="$HOME/.local/share/spotify-launcher/install/usr/share/spotify"
+  prefs="$HOME/.config/spotify/prefs"
+  [ -d "$spotify" ] && [ -f "$prefs" ] || {
+    printf '%s\n' 'Install spotify-launcher, then start Spotify and sign in once.' >&2
+    return 1
+  }
+
+  config="${XDG_CONFIG_HOME:-$HOME/.config}/spicetify"
+  theme="$config/Themes/text"
+  visualizer="$config/CustomApps/visualizer"
+  mkdir -p "$theme" "$visualizer"
+
+  theme_rev=33a08ea009687f5a42ff678015c28797fe142a7c
+  visualizer_rev=0b638afc56bdb0ece843c9569ca658a81ade6d53
+
+  curl -fLsS "https://raw.githubusercontent.com/spicetify/spicetify-themes/$theme_rev/text/user.css" -o "$theme/user.css"
+  cat >> "$theme/user.css" <<'CSS'
+
+:root {
+    --font-family: "Iosevka Nerd Font", monospace;
+    --font-family-header: "Iosevka Nerd Font";
+}
+CSS
+
+  cat > "$theme/color.ini" <<'COLORS'
+[KanagawaDragonCustom]
+accent             = 87a987
+accent-active      = 87a987
+accent-inactive    = 181616
+banner             = 87a987
+border-active      = 87a987
+border-inactive    = 393836
+header             = 9e9b93
+highlight          = 9e9b93
+main               = 181616
+notification       = 8ba4b0
+notification-error = c4746e
+subtext            = c0c3c0
+text               = a6a69c
+COLORS
+
+  for file in index.js manifest.json style.css; do
+    curl -fLsS "https://raw.githubusercontent.com/Konsl/spicetify-visualizer/$visualizer_rev/$file" -o "$visualizer/$file"
+  done
+
+  spicetify config spotify_path "$spotify" prefs_path "$prefs" current_theme text color_scheme KanagawaDragonCustom custom_apps visualizer
+  spicetify backup apply
+}
+
+if [ "$spicetify_only" = true ]; then
+  setup_spicetify
+  exit 0
+fi
+
+[ -t 0 ] || { printf '%s\n' 'An interactive terminal is required for confirmations.' >&2; exit 1; }
 
 setup_cachyos_repos() {
   if pacman-conf --repo-list | grep -qx cachyos; then
@@ -181,9 +241,9 @@ if [ "$packages_allowed" = true ]; then
   install_repo 'Spotify client (optional)' spotify-launcher || true
   install_aur 'Spicetify (optional)' spicetify-cli || true
   if command -v spicetify >/dev/null 2>&1 && [ -f "$HOME/.config/spotify/prefs" ]; then
-    if confirm 'Apply the Spicetify theme now (close Spotify first)?'; then ./scripts/setup-spicetify; fi
+    if confirm 'Apply the Spicetify theme now (close Spotify first)?'; then setup_spicetify; fi
   else
-    printf '%s\n' 'Sign in to Spotify once, then run ./scripts/setup-spicetify to apply the theme.'
+    printf '%s\n' 'Sign in to Spotify once, then run ./install.sh --spicetify to apply the theme.'
   fi
 
   install_repo 'Desktop apps and tools' kitty quickshell swaybg nnn polkit xdg-desktop-portal xdg-desktop-portal-gtk || true
@@ -198,12 +258,12 @@ if ! command -v stow >/dev/null 2>&1; then
   exit 1
 fi
 printf '\nPreviewing dotfile links...\n'
-if ! stow --no --verbose --restow common linux; then
+if ! stow --no --verbose --restow "$@"; then
   printf '%s\n' 'Stow found conflicts. Review and move existing files aside; nothing was overwritten.' >&2
   exit 1
 fi
-if confirm 'Link common and linux dotfiles now?'; then
-  stow --restow common linux
+if confirm 'Link Arch Linux dotfiles now?'; then
+  stow --restow "$@"
   printf '%s\n' 'Dotfiles linked.'
 else
   printf '%s\n' 'Dotfile links left unchanged.'

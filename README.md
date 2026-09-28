@@ -7,11 +7,13 @@ The repo tracks portable user overrides only. Machine-specific files such as
 
 ## Layout
 
-- `common`: shared Git, mise, Neovim, Oh My Posh, tmux, and Zsh config.
-- `darwin`: macOS Ghostty config.
-- `linux`: Arch Linux Kitty, MangoWC, and Quickshell.
-
-Each folder is a Stow package whose contents mirror paths under `$HOME`.
+Each tool has its own Stow package. Shared packages are `zsh`, `mise`, `nvim`,
+and `oh-my-posh`. Arch Linux packages are `kitty`, `mango`, `quickshell`,
+`kvantum`, `qt-theme`, `gtk`, `qt5ct`, `qt6ct`, and `xsettingsd`.
+Each package mirrors paths under `$HOME`: `zsh/.zshrc` links to `~/.zshrc`,
+for example. Kitty defaults to 14 pt. To change its font size on one machine,
+create `~/.config/kitty/local.conf` with `font_size 12` (or your preferred size).
+Kitty loads this optional file after the shared config; it stays untracked.
 
 ## Setup
 
@@ -39,9 +41,12 @@ It also asks before enabling services, applying Spicetify, or linking dotfiles.
 A new kernel or GPU driver needs a reboot and may require a bootloader update.
 The installer never reboots the machine.
 Stow refuses to overwrite existing regular files. Review and move them aside
-before retrying. Unlink with `stow --delete <packages>`.
+before retrying. Unlink with `stow --delete <packages>`. If you stowed the old layout, preview the new packages first. Stow can replace
+old links pointing into this repo during restow. Review any reported conflicts
+before changing local files.
 
-On macOS, install Stow with `brew install stow`, then run `stow --restow common darwin`.
+On macOS, install Stow with `brew install stow`, then run
+`stow --restow zsh mise nvim oh-my-posh` for the shared configs.
 MangoWC starts `qs` and
 `swaybg`. The Quickshell bar uses MangoWC tags via `mmsg`, Iosevka Nerd Font icons, and PipeWire audio.
 Wi-Fi controls require NetworkManager; Bluetooth controls require BlueZ.
@@ -52,10 +57,10 @@ require an active NetworkManager connection.
 Install the Kanagawa Dragon GTK and Kvantum theme assets separately; the
 installer handles the Papirus icons, Bibata cursor, and Iosevka font. The GTK,
 Qt, and xsettingsd settings select these installed themes. Do not Stow over
-existing local settings files; review and move them aside before restowing `linux`.
+existing local settings files; review and move them aside before restowing the affected package.
 
 After installing `spotify-launcher` and `spicetify-cli`, sign in to Spotify once,
-close it, and run `~/dotfiles/scripts/setup-spicetify`. The script downloads pinned
-versions of the Spicetify text theme and visualizer, sets the Kanagawa Dragon
-colors and Iosevka font, and applies them. Spicetify's generated config and
+close it, and run `~/dotfiles/install.sh --spicetify`. The installer downloads
+pinned versions of the Spicetify text theme and visualizer, sets the Kanagawa
+Dragon colors and Iosevka font, and applies them. Spicetify's generated config and
 Spotify account data stay outside the repo.
