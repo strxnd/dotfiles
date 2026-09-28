@@ -15,6 +15,19 @@ ShellRoot {
     property var tagsByMonitor: ({})
     property var openMenu: null
 
+    IpcHandler {
+        target: "launcher"
+        function toggle(): void {
+            if (root.openMenu) root.openMenu.visible = false;
+            appLauncher.visible = !appLauncher.visible;
+        }
+    }
+
+    AppLauncher {
+        id: appLauncher
+        onDismissed: visible = false
+    }
+
     function toggleMenu(menu) {
         if (openMenu === menu && menu.visible) {
             menu.visible = false;
