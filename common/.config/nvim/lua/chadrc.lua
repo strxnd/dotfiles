@@ -6,11 +6,14 @@
 local M = {}
 
 M.base46 = {
-  theme = "tokyonight",
+  theme = "kanagawa-dragon",
+  transparency = false,
 
   hl_override = {
     Comment = { italic = true },
     ["@comment"] = { italic = true },
+    NvimTreeNormal = { bg = "darker_black" },
+    NvimTreeNormalNC = { bg = "darker_black" },
   },
 }
 

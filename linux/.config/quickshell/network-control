@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+set -euo pipefail
+export LC_ALL=C
+
+command=${1:-}
+iface=${2:-}
+
+if [[ $command == route ]]; then
+  while IFS= read -r iface; do
+    if [[ -e /sys/class/net/$iface/device && ! -e /sys/class/net/$iface/wireless ]]; then
+      printf '%s\n' "$iface"
+      break
+    fi
+  done < <(ip -4 route show default | awk '/ dev / { for (i = 1; i < NF; i++) if ($i == "dev") { print $(i+1); break } }')
+  exit 0
+fi
+
+[[ $iface =~ ^[[:alnum:]_.:-]+$ ]] || exit 1
+profile=$(nmcli -g GENERAL.CON-UUID device show "$iface" 2>/dev/null | head -n 1 || true)
+
+case $command in
+  status)
+    ip=$(ip -4 -o addr show dev "$iface" | awk 'NR == 1 { print $4 }')
+    gateway=$(ip -4 route show default dev "$iface" | awk 'NR == 1 { print $3 }')
+    speed=$(cat "/sys/class/net/$iface/speed" 2>/dev/null || true)
+    rx=$(cat "/sys/class/net/$iface/statistics/rx_bytes" 2>/dev/null || true)
+    tx=$(cat "/sys/class/net/$iface/statistics/tx_bytes" 2>/dev/null || true)
+    band=''
+    if [[ $profile =~ ^[0-9a-fA-F-]{36}$ ]]; then
+      band=$(nmcli -g 802-11-wireless.band connection show "$profile" 2>/dev/null || true)
+    fi
+    available=''
+    if [[ -n ${3:-} ]]; then
+      while IFS= read -r entry; do
+        freq=${entry%%:*}
+        [[ ${entry#*:} == "${3}" ]] || continue
+        freq=${freq%% *}
+        if ((freq >= 2400 && freq < 2500)); then available="$available 2.4"
+        elif ((freq >= 4900 && freq < 5925)); then available="$available 5"
+        elif ((freq >= 5925 && freq < 7125)); then available="$available 6"
+        fi
+      done < <(nmcli -e no -t -f FREQ,SSID device wifi list ifname "$iface" --rescan no 2>/dev/null || true)
+    fi
+    case $band in
+      bg) band=2.4 ;;
+      a) band=5 ;;
+      6GHz) band=6 ;;
+      *) band=auto ;;
+    esac
+    printf 'ip\t%s\ngateway\t%s\nspeed\t%s\nrx\t%s\ntx\t%s\nband\t%s\navailable\t%s\n' "$ip" "$gateway" "$speed" "$rx" "$tx" "$band" "$available"
+    ;;
+  band)
+    [[ $profile =~ ^[0-9a-fA-F-]{36}$ ]] || exit 1
+    target=${3:-}
+    case $target in
+      auto) desired='' ;;
+      2.4) desired=bg ;;
+      5) desired=a ;;
+      6) desired=6GHz ;;
+      *) exit 1 ;;
+    esac
+    [[ $target == auto || " ${4:-} " == *" $target "* ]] || exit 1
+    previous=$(nmcli -g 802-11-wireless.band connection show "$profile")
+    [[ $previous != "$desired" ]] || exit 0
+    nmcli connection modify "$profile" 802-11-wireless.band "$desired"
+    if ! nmcli connection up "$profile" ifname "$iface"; then
+      nmcli connection modify "$profile" 802-11-wireless.band "$previous"
+      nmcli connection up "$profile" ifname "$iface" || true
+      exit 1
+    fi
+    ;;
+  *) exit 1 ;;
+esac

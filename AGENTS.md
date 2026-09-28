@@ -1,21 +1,20 @@
 # Agent Notes
 
 ## Repository Purpose and Shape
-- This is a personal macOS and Omarchy/Arch Linux dotfiles repository managed with GNU Stow.
-- The three top-level platform directories are Stow packages whose contents mirror paths under `$HOME`.
+- This is a personal macOS and Arch Linux dotfiles repository managed with GNU Stow.
+- The `common`, `linux`, and `darwin` directories are Stow packages whose contents mirror paths under `$HOME`.
   - `common/.config/nvim/...` links to `~/.config/nvim/...`.
   - `common/.zshrc` links to `~/.zshrc`.
-  - `linux/.config/hypr/bindings.lua` links to `~/.config/hypr/bindings.lua`.
+  - `linux/.config/mango/config.conf` links to `~/.config/mango/config.conf`.
 - `.stowrc` targets the repository parent, so the expected repository location is `~/dotfiles`.
-- Track portable user overrides only. Do not add Omarchy stock files, `monitors.lua`, first-boot invitation hooks, generated theme state, browser profiles, or secrets.
+- Track portable user config only. Keep machine-specific monitor settings, generated state, browser profiles, and secrets out of the repo.
 - Package installation is separate from Stow. Apply the appropriate packages manually with `stow --restow`.
 - There is no CI or repo-wide test runner. Validate the specific tool/config changed.
 
 ## Packages
 - `common`: Git, mise, Neovim, Oh My Posh, tmux, and Zsh.
-- `linux`: Ghostty, Hyprland (`bindings.lua` only), and Omarchy (`shell.json`, `shell.toml`, `defaults/agent`).
+- `linux`: Kitty, MangoWC, and Quickshell.
 - `darwin`: Ghostty.
-- Legacy Waybar, SwayNC, Fuzzel, and Hyprland `.conf` packages are gone. Do not re-add them.
 
 ## Common Workflow
 - Check current work before editing: `git status --short`.
@@ -43,10 +42,9 @@
 - `lazy-lock.json` is tracked; update it deliberately and avoid accidental broad plugin upgrades.
 
 ## Desktop Dotfiles
-- Linux Hyprland overrides belong in `linux/.config/hypr/`. Only ship files that differ from Omarchy's packaged defaults. `monitors.lua` is machine-local and must not be stowed.
-- Omarchy shell, font size, and default agent belong in the `linux` package. Edit those files here, then restow `linux`. Do not copy `/usr/share/omarchy/` into the repo.
-- Ghostty config is platform-specific: `linux/.config/ghostty/` on Omarchy and `darwin/.config/ghostty/` on macOS.
-- Yabai config and `hypr-mac-*` helper scripts are not in this repository yet; add them from the Air when editing there.
+- MangoWC config belongs in `linux/.config/mango/`. Keep display-specific settings in `~/.config/mango/local.conf`.
+- Quickshell config belongs in `linux/.config/quickshell/`; MangoWC starts it from `config.conf`.
+- Kitty config lives in `linux/.config/kitty/` on Arch Linux; Ghostty remains in `darwin/.config/ghostty/` on macOS.
 - Executable scripts must retain executable mode.
 
 ## Shell Configuration
